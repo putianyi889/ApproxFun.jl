@@ -65,7 +65,15 @@
             
                 <li class="toctree-l3"><a href="#approxfunjl-documentation">ApproxFun.jl Documentation</a></li>
                 
-                    <li><a class="toctree-l4" href="#creating-fun">Creating Fun</a></li>
+                    <li><a class="toctree-l4" href="#domains">Domains</a></li>
+                
+                    <li><a class="toctree-l4" href="#constructing-a-fun">Constructing a Fun</a></li>
+                
+                    <li><a class="toctree-l4" href="#accessing-information-about-a-fun">Accessing information about a Fun</a></li>
+                
+                    <li><a class="toctree-l4" href="#modify-a-fun">Modify a Fun</a></li>
+                
+                    <li><a class="toctree-l4" href="#operators">Operators</a></li>
                 
             
             </ul>
@@ -111,15 +119,92 @@
               
                 <p><a id='ApproxFun.jl-Documentation-1'></a></p>
 <h1 id="approxfunjl-documentation">ApproxFun.jl Documentation</h1>
-<p><a id='Creating-Fun-1'></a></p>
-<h2 id="creating-fun">Creating Fun</h2>
+<p><a id='Domains-1'></a></p>
+<h2 id="domains">Domains</h2>
+<pre><code>Interval
+</code></pre>
+
+<p><a id='Constructing-a-Fun-1'></a></p>
+<h2 id="constructing-a-fun">Constructing a Fun</h2>
 <p><a id='ApproxFun.Fun' href='#ApproxFun.Fun'>#</a>
 <strong><code>ApproxFun.Fun</code></strong> &mdash; <em>Type</em>.</p>
 <pre><code>Fun(coefficients,space)
 </code></pre>
 
 <p>returns a Fun with coefficients in the space</p>
-<p><a target='_blank' href='https://github.com/ApproxFun/ApproxFun.jl/tree/1372da7fd409ae4dc02f8a8485b31696b2e6d07b/src/Fun/Fun.jl#L20-L24' class='documenter-source'>source</a><br></p>
+<p><a target='_blank' href='https://github.com/ApproxFun/ApproxFun.jl/tree/e07a765007e8f1db32f13b1dc187b2f081553a06/src/Fun/Fun.jl#L20-L24' class='documenter-source'>source</a><br></p>
+<p><a id='Accessing-information-about-a-Fun-1'></a></p>
+<h2 id="accessing-information-about-a-fun">Accessing information about a Fun</h2>
+<p><a id='ApproxFun.domain' href='#ApproxFun.domain'>#</a>
+<strong><code>ApproxFun.domain</code></strong> &mdash; <em>Function</em>.</p>
+<pre><code>domain(::Fun)
+</code></pre>
+
+<p>returns the domain that a <code>Fun</code> is defined on</p>
+<p><a target='_blank' href='https://github.com/ApproxFun/ApproxFun.jl/tree/e07a765007e8f1db32f13b1dc187b2f081553a06/src/docs.jl#L7' class='documenter-source'>source</a><br></p>
+<pre><code>setdomain(fun,domain)
+</code></pre>
+
+<p>returns <code>fun</code> projected onto <code>domain</code></p>
+<p><a target='_blank' href='https://github.com/ApproxFun/ApproxFun.jl/tree/e07a765007e8f1db32f13b1dc187b2f081553a06/src/docs.jl#L15' class='documenter-source'>source</a><br></p>
+<p><a id='ApproxFun.coefficients' href='#ApproxFun.coefficients'>#</a>
+<strong><code>ApproxFun.coefficients</code></strong> &mdash; <em>Function</em>.</p>
+<pre><code>coefficients(fun,space)
+</code></pre>
+
+<p>returns the coefficients of a fun in a possibly different space</p>
+<p><a target='_blank' href='https://github.com/ApproxFun/ApproxFun.jl/tree/e07a765007e8f1db32f13b1dc187b2f081553a06/src/Fun/Fun.jl#L39-L43' class='documenter-source'>source</a><br></p>
+<pre><code>extrapolate
+</code></pre>
+
+<p><a id='ApproxFun.ncoefficients' href='#ApproxFun.ncoefficients'>#</a>
+<strong><code>ApproxFun.ncoefficients</code></strong> &mdash; <em>Function</em>.</p>
+<pre><code>ncoefficients(fun) -&gt; Integer
+</code></pre>
+
+<p>returns the number of coefficients of a fun</p>
+<p><a target='_blank' href='https://github.com/ApproxFun/ApproxFun.jl/tree/e07a765007e8f1db32f13b1dc187b2f081553a06/src/docs.jl#L51' class='documenter-source'>source</a><br></p>
+<p><a id='ApproxFun.points' href='#ApproxFun.points'>#</a>
+<strong><code>ApproxFun.points</code></strong> &mdash; <em>Function</em>.</p>
+<pre><code>points(fun)
+</code></pre>
+
+<p>returns a grid of points that the fun can be transformed into values and back</p>
+<p><a target='_blank' href='https://github.com/ApproxFun/ApproxFun.jl/tree/e07a765007e8f1db32f13b1dc187b2f081553a06/src/docs.jl#L42' class='documenter-source'>source</a><br></p>
+<p><a id='ApproxFun.space' href='#ApproxFun.space'>#</a>
+<strong><code>ApproxFun.space</code></strong> &mdash; <em>Function</em>.</p>
+<pre><code>space(fun)
+</code></pre>
+
+<p>returns the space of <code>fun</code></p>
+<p><a target='_blank' href='https://github.com/ApproxFun/ApproxFun.jl/tree/e07a765007e8f1db32f13b1dc187b2f081553a06/src/docs.jl#L23' class='documenter-source'>source</a><br></p>
+<p><a id='Base.values' href='#Base.values'>#</a>
+<strong><code>Base.values</code></strong> &mdash; <em>Function</em>.</p>
+<pre><code>values(collection)
+</code></pre>
+
+<p>Return an iterator over all values in a collection. <code>collect(values(d))</code> returns an array of values.</p>
+<p><a target='_blank' href='https://github.com/JuliaLang/julia/tree/3c9d75391c72d7c32eea75ff187ce77b2d5effc8/base/docs/helpdb/Base.jl#L3776-L3780' class='documenter-source'>source</a><br></p>
+<p><a id='Modify-a-Fun-1'></a></p>
+<h2 id="modify-a-fun">Modify a Fun</h2>
+<p><a id='ApproxFun.reverseorientation' href='#ApproxFun.reverseorientation'>#</a>
+<strong><code>ApproxFun.reverseorientation</code></strong> &mdash; <em>Function</em>.</p>
+<pre><code>reverseorientation(fun)
+</code></pre>
+
+<p>return <code>fun</code> on a reversed orientated contour</p>
+<p><a target='_blank' href='https://github.com/ApproxFun/ApproxFun.jl/tree/e07a765007e8f1db32f13b1dc187b2f081553a06/src/docs.jl#L68' class='documenter-source'>source</a><br></p>
+<pre><code>ApproxFun.setdomain
+</code></pre>
+
+<p><a id='Operators-1'></a></p>
+<h2 id="operators">Operators</h2>
+<p><a id='ApproxFun.Operator' href='#ApproxFun.Operator'>#</a>
+<strong><code>ApproxFun.Operator</code></strong> &mdash; <em>Type</em>.</p>
+<pre><code>`Operator{T}` represents a general operator
+</code></pre>
+
+<p><a target='_blank' href='https://github.com/ApproxFun/ApproxFun.jl/tree/e07a765007e8f1db32f13b1dc187b2f081553a06/src/docs.jl#L79' class='documenter-source'>source</a><br></p>
               
             </div>
           </div>
@@ -158,5 +243,5 @@
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-10-15 07:10:51.967126
+Build Date UTC : 2016-10-15 10:07:41.624964
 -->
