@@ -1,0 +1,39 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "ApproxFun.jl Documentation\n\n\n\n\nDomains\n\n\nInterval\n\n\n\n\n\n\nConstructing a Fun\n\n\n#\n\n\nApproxFun.Fun\n \n \nType\n.\n\n\nFun(coefficients,space)\n\n\n\n\nreturns a Fun with coefficients in the space\n\n\nsource\n\n\n\n\nAccessing information about a Fun\n\n\n#\n\n\nApproxFun.domain\n \n \nFunction\n.\n\n\ndomain(::Fun)\n\n\n\n\nreturns the domain that a \nFun\n is defined on\n\n\nsource\n\n\nsetdomain(fun,domain)\n\n\n\n\nreturns \nfun\n projected onto \ndomain\n\n\nsource\n\n\n#\n\n\nApproxFun.coefficients\n \n \nFunction\n.\n\n\ncoefficients(fun,space)\n\n\n\n\nreturns the coefficients of a fun in a possibly different space\n\n\nsource\n\n\nextrapolate\n\n\n\n\n#\n\n\nApproxFun.ncoefficients\n \n \nFunction\n.\n\n\nncoefficients(fun) -\n Integer\n\n\n\n\nreturns the number of coefficients of a fun\n\n\nsource\n\n\n#\n\n\nApproxFun.points\n \n \nFunction\n.\n\n\npoints(fun)\n\n\n\n\nreturns a grid of points that the fun can be transformed into values and back\n\n\nsource\n\n\n#\n\n\nApproxFun.space\n \n \nFunction\n.\n\n\nspace(fun)\n\n\n\n\nreturns the space of \nfun\n\n\nsource\n\n\n#\n\n\nBase.values\n \n \nFunction\n.\n\n\nvalues(collection)\n\n\n\n\nReturn an iterator over all values in a collection. \ncollect(values(d))\n returns an array of values.\n\n\nsource\n\n\n\n\nModify a Fun\n\n\n#\n\n\nApproxFun.reverseorientation\n \n \nFunction\n.\n\n\nreverseorientation(fun)\n\n\n\n\nreturn \nfun\n on a reversed orientated contour\n\n\nsource\n\n\nApproxFun.setdomain\n\n\n\n\n\n\nOperators\n\n\n#\n\n\nApproxFun.Operator\n \n \nType\n.\n\n\n`Operator{T}` represents a general operator\n\n\n\n\nsource", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#approxfunjl-documentation", 
+            "text": "", 
+            "title": "ApproxFun.jl Documentation"
+        }, 
+        {
+            "location": "/#domains", 
+            "text": "Interval", 
+            "title": "Domains"
+        }, 
+        {
+            "location": "/#constructing-a-fun", 
+            "text": "#  ApproxFun.Fun     Type .  Fun(coefficients,space)  returns a Fun with coefficients in the space  source", 
+            "title": "Constructing a Fun"
+        }, 
+        {
+            "location": "/#accessing-information-about-a-fun", 
+            "text": "#  ApproxFun.domain     Function .  domain(::Fun)  returns the domain that a  Fun  is defined on  source  setdomain(fun,domain)  returns  fun  projected onto  domain  source  #  ApproxFun.coefficients     Function .  coefficients(fun,space)  returns the coefficients of a fun in a possibly different space  source  extrapolate  #  ApproxFun.ncoefficients     Function .  ncoefficients(fun) -  Integer  returns the number of coefficients of a fun  source  #  ApproxFun.points     Function .  points(fun)  returns a grid of points that the fun can be transformed into values and back  source  #  ApproxFun.space     Function .  space(fun)  returns the space of  fun  source  #  Base.values     Function .  values(collection)  Return an iterator over all values in a collection.  collect(values(d))  returns an array of values.  source", 
+            "title": "Accessing information about a Fun"
+        }, 
+        {
+            "location": "/#modify-a-fun", 
+            "text": "#  ApproxFun.reverseorientation     Function .  reverseorientation(fun)  return  fun  on a reversed orientated contour  source  ApproxFun.setdomain", 
+            "title": "Modify a Fun"
+        }, 
+        {
+            "location": "/#operators", 
+            "text": "#  ApproxFun.Operator     Type .  `Operator{T}` represents a general operator  source", 
+            "title": "Operators"
+        }
+    ]
+}
