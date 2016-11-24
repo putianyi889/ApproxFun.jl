@@ -266,15 +266,15 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "faq.html#",
-    "page": "FAQ",
-    "title": "FAQ",
+    "page": "Frequently Asked Questions",
+    "title": "Frequently Asked Questions",
     "category": "page",
     "text": ""
 },
 
 {
     "location": "faq.html#Frequently-Asked-Questions-1",
-    "page": "FAQ",
+    "page": "Frequently Asked Questions",
     "title": "Frequently Asked Questions",
     "category": "section",
     "text": ""
@@ -282,7 +282,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "faq.html#Approximating-functions-1",
-    "page": "FAQ",
+    "page": "Frequently Asked Questions",
     "title": "Approximating functions",
     "category": "section",
     "text": ""
@@ -290,7 +290,7 @@ var documenterSearchIndex = {"docs": [
 
 {
     "location": "faq.html#How-do-I-interpolate-a-function-at-a-specified-grid?-1",
-    "page": "FAQ",
+    "page": "Frequently Asked Questions",
     "title": "How do I interpolate a function at a specified grid?",
     "category": "section",
     "text": "In the case where the grid is specified by points(space,n), you can apply the default transform to data:S = Chebyshev([1,2])  \np = points(S,20) # the default grid\nv = exp.(p)      # values at the default grid\nf = Fun(ApproxFun.transform(S,vals),S)ApproxFun has no inbuilt support for interpolating functions at other sets of points, but this can be accomplished manually by evaluating the basis at the set of points and using \\:S = Chebyshev([1,2])  \nn = 50\np = linspace(1,2,n)  # a non-default grid\nv = exp.(p)           # values at the non-default grid\n# Create a Vandermonde matrix by evaluating the basis at the grid\nV = Array(Float64,n,n)\nfor k = 1:n\n    V[:,k] = Fun([zeros(k-1);1],S)(p)\nend\nf = Fun(V\\v,S)   Note that an evenly spaced grid suffers from instability for large n.  The easiest way around this is to use least squares with more points than coefficients, instead of interpolation:S = Chebyshev([1,2])  \nn = 100; m = 50\np = linspace(1,2,n)  # a non-default grid\nv = exp.(p)           # values at the non-default grid\n# Create a Vandermonde matrix by evaluating the basis at the grid\nV = Array(Float64,n,m)\nfor k = 1:m\n    V[:,k] = Fun([zeros(k-1);1],S)(p)\nend\nf = Fun(V\\v,S)   "
