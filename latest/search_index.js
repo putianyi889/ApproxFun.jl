@@ -37,7 +37,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "ApproxFun.Curve",
     "category": "Constant",
-    "text": "Curve Represents a domain defined by the image of a Fun.  Example usage would be\n\nx=Fun([1,2])\nCurve(exp(im*x))  # represents an arc\n\n\n\n"
+    "text": "Curve Represents a domain defined by the image of a Fun.  Example usage would be\n\nx=Fun(1..2)\nCurve(exp(im*x))  # represents an arc\n\n\n\n"
 },
 
 {
