@@ -13,7 +13,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "ApproxFun.jl Documentation",
     "category": "section",
-    "text": "ApproxFun is a package for approximating and manipulating functions, and for solving differential and integral equations.  Pages = [\"usage/constructors.md\",\n         \"usage/domains.md\",\n         \"usage/spaces.md\",\n         \"faq.md\",\n         \"library.md\"]"
+    "text": "ApproxFun is a package for approximating and manipulating functions, and for solving differential and integral equations.  Pages = [\"usage/constructors.md\",\n         \"usage/domains.md\",\n         \"usage/spaces.md\",\n         \"usage/operators.md\",\n         \"faq.md\",\n         \"library.md\"]"
 },
 
 {
@@ -150,6 +150,46 @@ var documenterSearchIndex = {"docs": [
     "title": "Using the Chebyshev interpolant",
     "category": "section",
     "text": "We can evaluate the interpolation at a point x ∈ d just by calling fc(x). Since we only used 10 points, it is not accurate to machine precision, but it is still pretty accurate:fc(0.2) - f(0.2)\n1.3975267609822595e-9We can compute the derivative at an arbitrary point simply by fc'(x), which will give us a good approximation for the exact derivative 2*exp(2x):fc'(0.2) - 2*exp(2*0.2)\n5.5879429972094385e-9"
+},
+
+{
+    "location": "usage/operators.html#",
+    "page": "Operators",
+    "title": "Operators",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "usage/operators.html#Operators-1",
+    "page": "Operators",
+    "title": "Operators",
+    "category": "section",
+    "text": "DocTestSetup = quote\n    using ApproxFun\nendLinear operators between two spaces in ApproxFun are represented by subtypes of Operator.  Every operator has a domainspace and rangespace. That is, if a Fun f has the space domainspace(op), thenop*f is a Fun with space rangespace(op).Note that the size of an operator is specified by the dimension of the domain and range space.  "
+},
+
+{
+    "location": "usage/operators.html#Calculus-operators-1",
+    "page": "Operators",
+    "title": "Calculus operators",
+    "category": "section",
+    "text": "Differential and integral operators are perhaps the most useful type of operators in mathematics.  Consider the derivative operator on CosSpace:julia> D = Derivative(CosSpace())\nConcreteDerivative:CosSpace(【-3.141592653589793,3.141592653589793❫)→SinSpace(【-3.141592653589793,3.141592653589793❫)\n 0.0  -1.0                                                   \n       0.0  -2.0                                             \n             0.0  -3.0                                       \n                   0.0  -4.0                                 \n                         0.0  -5.0                           \n                               0.0  -6.0                     \n                                     0.0  -7.0               \n                                           0.0  -8.0         \n                                                 0.0  -9.0   \n                                                       0.0  ⋱\n                                                            ⋱\n\njulia> f = Fun(θ->cos(cos(θ)),CosSpace());\n\njulia> fp = D*f;\n\njulia> fp(0.1) ≈ f'(0.1) ≈ sin(cos(0.1))*sin(0.1)\ntrueHere, we specified the domain space for the derivative operator, and it automatically determined the range space:DocTestSetup = quote\n    using ApproxFun\n    D = Derivative(CosSpace())\n    f = Fun(θ->cos(cos(θ)),CosSpace())\n    fp = D*f\nendjulia> rangespace(D) == space(fp) == SinSpace()\ntrueOperators can be identified with infinite-dimensional matrices, whose entries are given by the canonical bases in the domain and range space.  In this case, the relevant formula is D cos k theta = -k sin k theta That is, the (k,k+1)th entry is as follows:julia> k,j = 5,6;\n\njulia> ej = Fun(domainspace(D),[zeros(j-1);1]);\n\njulia> D[k,j] ≈ (D*ej).coefficients[k] ≈ -k\ntrueThe Chebyshev space has the property that its derivatives are given by ultraspherical spaces:julia> Derivative(Chebyshev())\nConcreteDerivative:Chebyshev(【-1.0,1.0】)→Ultraspherical(1,【-1.0,1.0】)\n 0.0  1.0                                           \n      0.0  2.0                                      \n           0.0  3.0                                 \n                0.0  4.0                            \n                     0.0  5.0                       \n                          0.0  6.0                  \n                               0.0  7.0             \n                                    0.0  8.0        \n                                         0.0  9.0   \n                                              0.0  ⋱\n                                                   ⋱"
+},
+
+{
+    "location": "usage/operators.html#Functionals-1",
+    "page": "Operators",
+    "title": "Functionals",
+    "category": "section",
+    "text": "A particularly useful class of operators are _functionals_, which map from functions to scalar numbers.  These are represented by operators of size 1 × ∞: that is, infinite-dimensional analogues of row vectors.As an example, the evaluation functional f(0) on CosSpace has the form:julia> B = Evaluation(CosSpace(),0)\nConcreteEvaluation:CosSpace(【-3.141592653589793,3.141592653589793❫)→ConstantSpace(Point(0))\n 1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  ⋯\n\njulia> B*f ≈ f(0)\ntrueAs can be seen from the output, rangespace(B) is a ConstantSpace(Point(0)), a one-dimensional space used to represent scalars whose domain is a single point, 0."
+},
+
+{
+    "location": "usage/operators.html#Algebraic-manipulation-of-operators-1",
+    "page": "Operators",
+    "title": "Algebraic manipulation of operators",
+    "category": "section",
+    "text": "Operators can be algebraically manipulated, provided that the domain and range spaces are compatible, or can be made compatible.   As a simple example, we can add the second derivative of a Fourier space to the identity operator:julia> D2 = Derivative(Fourier(),2)\nDerivativeWrapper:Fourier(【-3.141592653589793,3.141592653589793❫)→Fourier(【-3.141592653589793,3.141592653589793❫)\n 0.0   0.0                                                      \n 0.0  -1.0   0.0                                                \n       0.0  -1.0   0.0                                          \n             0.0  -4.0   0.0                                    \n                   0.0  -4.0   0.0                              \n                         0.0  -9.0   0.0                        \n                               0.0  -9.0    0.0                 \n                                     0.0  -16.0    0.0          \n                                            0.0  -16.0    0.0   \n                                                   0.0  -25.0  ⋱\n                                                           ⋱   ⋱\n\njulia> D2 + I\nPlusOperator:Fourier(【-3.141592653589793,3.141592653589793❫)→Fourier(【-3.141592653589793,3.141592653589793❫)\n 1.0  0.0                                                     \n 0.0  0.0  0.0                                                \n      0.0  0.0   0.0                                          \n           0.0  -3.0   0.0                                    \n                 0.0  -3.0   0.0                              \n                       0.0  -8.0   0.0                        \n                             0.0  -8.0    0.0                 \n                                   0.0  -15.0    0.0          \n                                          0.0  -15.0    0.0   \n                                                 0.0  -24.0  ⋱\n                                                         ⋱   ⋱When the domain and range space are not the same, the identity operator becomes a conversion operator.  That is, to represent D+I acting on the Chebyshev space, we would do the following:julia> D = Derivative(Chebyshev())\nConcreteDerivative:Chebyshev(【-1.0,1.0】)→Ultraspherical(1,【-1.0,1.0】)\n 0.0  1.0                                           \n      0.0  2.0                                      \n           0.0  3.0                                 \n                0.0  4.0                            \n                     0.0  5.0                       \n                          0.0  6.0                  \n                               0.0  7.0             \n                                    0.0  8.0        \n                                         0.0  9.0   \n                                              0.0  ⋱\n                                                   ⋱\n\njulia> C = Conversion(Chebyshev(),Ultraspherical(1))\nConcreteConversion:Chebyshev(【-1.0,1.0】)→Ultraspherical(1,【-1.0,1.0】)\n 1.0  0.0  -0.5                                             \n      0.5   0.0  -0.5                                       \n            0.5   0.0  -0.5                                 \n                  0.5   0.0  -0.5                           \n                        0.5   0.0  -0.5                     \n                              0.5   0.0  -0.5               \n                                    0.5   0.0  -0.5         \n                                          0.5   0.0  -0.5   \n                                                0.5   0.0  ⋱\n                                                      0.5  ⋱\n                                                           ⋱\n\njulia> D + C\nPlusOperator:Chebyshev(【-1.0,1.0】)→Ultraspherical(1,【-1.0,1.0】)\n 1.0  1.0  -0.5                                             \n      0.5   2.0  -0.5                                       \n            0.5   3.0  -0.5                                 \n                  0.5   4.0  -0.5                           \n                        0.5   5.0  -0.5                     \n                              0.5   6.0  -0.5               \n                                    0.5   7.0  -0.5         \n                                          0.5   8.0  -0.5   \n                                                0.5   9.0  ⋱\n                                                      0.5  ⋱\n                                                           ⋱ApproxFun can automatically determine the spaces, so if one writes D + I it will translate it to D + C.  Now consider the Fredholm integral operator of the second kind:L u = u + rm e^x int_-1^1 u(x) rm dxWe can construct this usingjulia> x = Fun();\n\njulia> Q = DefiniteIntegral(Chebyshev())\nConcreteDefiniteIntegral:Chebyshev(【-1.0,1.0】)→ConstantSpace\n 2.0  0.0  -0.666667  0.0  -0.133333  0.0  -0.0571429  0.0  -0.031746  0.0  ⋯\n\njulia> L = I + exp(x)*Q\nLowRankPertOperator:Chebyshev(【-1.0,1.0】)→Chebyshev(【-1.0,1.0】)\n 3.53213     0.0  -0.844044     0.0  …  0.0  -0.0401926    0.0  ⋯\n 2.26064     1.0  -0.753545     0.0     0.0  -0.0358831    0.0  ⋱\n 0.542991    0.0   0.819003     0.0     0.0  -0.0086189    0.0  ⋱\n 0.0886737   0.0  -0.0295579    1.0     0.0  -0.00140752   0.0  ⋱\n 0.0109485   0.0  -0.00364949   0.0     0.0  -0.000173785  0.0  ⋱\n 0.00108585  0.0  -0.000361951  0.0  …  0.0  -1.72358e-5   0.0  ⋱\n 8.99546e-5  0.0  -2.99849e-5   0.0     0.0  -1.42785e-6   0.0  ⋱\n 6.39687e-6  0.0  -2.13229e-6   0.0     1.0  -1.01538e-7   0.0  ⋱\n 3.98425e-7  0.0  -1.32808e-7   0.0     0.0   1.0          0.0  ⋱\n 2.20735e-8  0.0  -7.35785e-9   0.0     0.0  -3.50374e-10  1.0  ⋱\n  ⋮           ⋱     ⋱            ⋱   …   ⋱     ⋱            ⋱   ⋱\n\njulia> u = cos(10x^2);\n\njulia> (L*u)(0.1)\n1.3777980523127333\n\njulia> u(0.1) + exp(0.1)*sum(u)\n1.3777980523127336Note that DefiniteIntegral is a functional, i.e., a 1 × ∞ operator.  when multiplied on the left by a function, it automatically constructs the operator rm e^x int_-1^1 f(x) dx viaDocTestSetup = quote\n    using ApproxFun\n    x = Fun()\n    Q = DefiniteIntegral(Chebyshev())\nendjulia> M = Multiplication(exp(x),ConstantSpace())\nConcreteMultiplication:ConstantSpace→Chebyshev(【-1.0,1.0】)\n 1.26607    \n 1.13032    \n 0.271495   \n 0.0443368  \n 0.00547424\n 0.000542926\n 4.49773e-5\n 3.19844e-6\n 1.99212e-7\n 1.10368e-8\n  ⋮         \n\njulia> M*Q\nTimesOperator:Chebyshev(【-1.0,1.0】)→Chebyshev(【-1.0,1.0】)\n 2.53213     0.0  -0.844044     0.0  …  0.0  -0.0401926    0.0  ⋯\n 2.26064     0.0  -0.753545     0.0     0.0  -0.0358831    0.0  ⋱\n 0.542991    0.0  -0.180997     0.0     0.0  -0.0086189    0.0  ⋱\n 0.0886737   0.0  -0.0295579    0.0     0.0  -0.00140752   0.0  ⋱\n 0.0109485   0.0  -0.00364949   0.0     0.0  -0.000173785  0.0  ⋱\n 0.00108585  0.0  -0.000361951  0.0  …  0.0  -1.72358e-5   0.0  ⋱\n 8.99546e-5  0.0  -2.99849e-5   0.0     0.0  -1.42785e-6   0.0  ⋱\n 6.39687e-6  0.0  -2.13229e-6   0.0     0.0  -1.01538e-7   0.0  ⋱\n 3.98425e-7  0.0  -1.32808e-7   0.0     0.0  -6.32421e-9   0.0  ⋱\n 2.20735e-8  0.0  -7.35785e-9   0.0     0.0  -3.50374e-10  0.0  ⋱\n  ⋮           ⋱     ⋱            ⋱   …   ⋱     ⋱            ⋱   ⋱DocTestSetup = nothing"
 },
 
 {
@@ -477,7 +517,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "ApproxFun.JacobiWeight",
     "category": "Type",
-    "text": "JacobiWeight weights a basis on [-1,1] weighted by (1+x)^β*(1-x)^α. Note the inconsistency of the parameters with Jacobi. when the domain is [a,b] the weight is inferred by mapping to [-1,1]\n\n\n\n"
+    "text": "JacobiWeight(β,α,s::Space)\n\nweights a space s by a Jacobi weight, which on -1..1 is (1+x)^β*(1-x)^α. For other domains, the weight is inferred by mapping to -1..1.\n\n\n\n"
 },
 
 {
@@ -485,7 +525,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "ApproxFun.LogWeight",
     "category": "Type",
-    "text": "LogWeight  represents a function on [-1,1] weighted by log((1+x)^β*(1-x)^α)\n\n\n\n"
+    "text": "LogWeight(β,α,s::Space)\n\nrepresents a function on -1..1 weighted by log((1+x)^β*(1-x)^α). For other domains, the weight is inferred by mapping to -1..1.\n\n\n\n"
 },
 
 {
@@ -493,7 +533,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "ApproxFun.ArraySpace",
     "category": "Type",
-    "text": "ArraySpace used to represent array-valued expansions in space.  The coefficients are of each entry are interlaced.\n\n\n\n"
+    "text": "ArraySpace(s::Space,dims...)\n\nis used to represent array-valued expansions in a space s.  The coefficients are of each entry are interlaced.\n\nFor example,\n\nf = Fun(x->[exp(x),sin(x)],-1..1)\nspace(f) == ArraySpace(Chebyshev(),2)\n\n\n\n"
 },
 
 {
@@ -501,7 +541,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "ApproxFun.TensorSpace",
     "category": "Type",
-    "text": "TensorSpace(Chebyshev(),Chebyshev())\n\nrepresents a tensor product of two 1D spaces.  The coefficients are interlaced in lexigraphical order.\n\nTo see this in action, consider\n\nFourier()*Chebyshev()  # returns TensorSpace(Fourier(),Chebyshev())\n\nThis represents functions on [-π,π) x [-1,1], using the Fourier basis for the first argument and Chebyshev basis for the second argument, that is, φ_k(x)T_j(y), where\n\nφ_0(x) = 1,\nφ_1(x) = sin x,\nφ_2(x) = cos x,\nφ_3(x) = sin 2x,\nφ_4(x) = cos 2x\n…\n\nBy Choosing (k,j) appropriately, we obtain a single basis:\n\nφ_0(x)T_0(y) (= 1),\nφ_0(x)T_1(y) (= y),\nφ_1(x)T_0(y) (= sin x),\nφ_0(x)T_2(y), …\n\n\n\n"
+    "text": "TensorSpace(a::Space,b::Space)\n\nrepresents a tensor product of two 1D spaces a and b. The coefficients are interlaced in lexigraphical order.\n\nFor example, consider\n\nFourier()*Chebyshev()  # returns TensorSpace(Fourier(),Chebyshev())\n\nThis represents functions on [-π,π) x [-1,1], using the Fourier basis for the first argument and Chebyshev basis for the second argument, that is, φ_k(x)T_j(y), where\n\nφ_0(x) = 1,\nφ_1(x) = sin x,\nφ_2(x) = cos x,\nφ_3(x) = sin 2x,\nφ_4(x) = cos 2x\n…\n\nBy Choosing (k,j) appropriately, we obtain a single basis:\n\nφ_0(x)T_0(y) (= 1),\nφ_0(x)T_1(y) (= y),\nφ_1(x)T_0(y) (= sin x),\nφ_0(x)T_2(y), …\n\n\n\n"
 },
 
 {
