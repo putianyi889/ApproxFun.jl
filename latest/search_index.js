@@ -201,6 +201,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "library.html#ApproxFun.Point",
+    "page": "Library",
+    "title": "ApproxFun.Point",
+    "category": "Type",
+    "text": "Point(x)\n\nrepresents a single point at x.\n\n\n\n"
+},
+
+{
     "location": "library.html#ApproxFun.ProductDomain",
     "page": "Library",
     "title": "ApproxFun.ProductDomain",
@@ -237,7 +245,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Domains",
     "category": "section",
-    "text": "ArcCircleCurveDiskIntervalLinePeriodicIntervalProductDomainRayUnionDomain∂"
+    "text": "ArcCircleCurveDiskIntervalLinePeriodicIntervalApproxFun.PointProductDomainRayUnionDomain∂"
 },
 
 {
@@ -361,11 +369,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "library.html#ApproxFun.Jacobi",
+    "page": "Library",
+    "title": "ApproxFun.Jacobi",
+    "category": "Type",
+    "text": "Jacobi(b,a) represents the space spanned by Jacobi polynomials P_k^{(a,b)}, which are orthogonal with respect to the weight (1+x)^β*(1-x)^α\n\n\n\n"
+},
+
+{
     "location": "library.html#ApproxFun.JacobiWeight",
     "page": "Library",
     "title": "ApproxFun.JacobiWeight",
     "category": "Type",
-    "text": "JacobiWeight weights a basis on [-1,1] weighted by (1+x)^α*(1-x)^β. Note the inconsistency of the parameters with Jacobi. when the domain is [a,b] the weight is inferred by mapping to [-1,1]\n\n\n\n"
+    "text": "JacobiWeight weights a basis on [-1,1] weighted by (1+x)^β*(1-x)^α. Note the inconsistency of the parameters with Jacobi. when the domain is [a,b] the weight is inferred by mapping to [-1,1]\n\n\n\n"
 },
 
 {
@@ -373,7 +389,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "ApproxFun.LogWeight",
     "category": "Type",
-    "text": "LogWeight  represents a function on [-1,1] weighted by log((1+x)^α*(1-x)^β)\n\n\n\n"
+    "text": "LogWeight  represents a function on [-1,1] weighted by log((1+x)^β*(1-x)^α)\n\n\n\n"
 },
 
 {
@@ -393,11 +409,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Included-spaces-1",
+    "location": "library.html#Inbuilt-spaces-1",
     "page": "Library",
-    "title": "Included spaces",
+    "title": "Inbuilt spaces",
     "category": "section",
-    "text": "SequenceSpaceConstantSpaceChebyshevTaylorHardy{false}FourierLaurentCosSpaceSinSpaceJacobiWeightApproxFun.LogWeightApproxFun.ArraySpaceTensorSpace"
+    "text": "SequenceSpaceConstantSpaceChebyshevTaylorHardy{false}FourierLaurentCosSpaceSinSpaceJacobiJacobiWeightApproxFun.LogWeightApproxFun.ArraySpaceTensorSpace"
 },
 
 {
@@ -537,14 +553,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#ApproxFun.Conversion",
-    "page": "Library",
-    "title": "ApproxFun.Conversion",
-    "category": "Type",
-    "text": "Conversion(fromspace::Space,tospace::Space)\n\nrepresents a conversion operator between fromspace and tospace, when available.\n\n\n\n"
-},
-
-{
     "location": "library.html#Base.LinAlg.qrfact-Tuple{ApproxFun.Operator}",
     "page": "Library",
     "title": "Base.LinAlg.qrfact",
@@ -565,7 +573,55 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Operators",
     "category": "section",
-    "text": "OperatordomainspacerangespaceBase.getindex(::Operator,::,::)linsolveConversionqrfact(::Operator)cache(::Operator)"
+    "text": "OperatordomainspacerangespaceBase.getindex(::Operator,::,::)linsolveqrfact(::Operator)cache(::Operator)"
+},
+
+{
+    "location": "library.html#ApproxFun.Conversion",
+    "page": "Library",
+    "title": "ApproxFun.Conversion",
+    "category": "Type",
+    "text": "Conversion(fromspace::Space,tospace::Space)\n\nrepresents a conversion operator between fromspace and tospace, when available.\n\n\n\n"
+},
+
+{
+    "location": "library.html#ApproxFun.Derivative",
+    "page": "Library",
+    "title": "ApproxFun.Derivative",
+    "category": "Type",
+    "text": "Derivative(sp::Space,k::Int) represents the k-th derivative on sp.\n\n\n\nDerivative(sp::Space,k::Vector{Int}) represents a partial derivative on a multivariate space. For example,\n\nDx = Derivative(Chebyshev()^2,[1,0]) # ∂/∂x\nDy = Derivative(Chebyshev()^2,[0,1]) # ∂/∂y\n\n\n\nDerivative(sp::Space) represents the first derivative Derivative(sp,1).\n\n\n\nDerivative(k) represents the k-th derivative, acting on an unset space. Spaces will be inferred when applying or manipulating the operator.\n\n\n\nDerivative() represents the first derivative on an unset space. Spaces will be inferred when applying or manipulating the operator.\n\n\n\n"
+},
+
+{
+    "location": "library.html#ApproxFun.Integral",
+    "page": "Library",
+    "title": "ApproxFun.Integral",
+    "category": "Type",
+    "text": "Integral(sp::Space,k::Int) represents a k-th integral on sp. There is no guarantee on normalization.\n\n\n\nIntegral(sp::Space) represents the first integral Integral(sp,1).\n\n\n\nIntegral(k)represents thek`-th integral, acting on an unset space. Spaces will be inferred when applying or manipulating the operator.\n\n\n\nIntergral() represents the first integral on an unset space. Spaces will be inferred when applying or manipulating the operator.\n\n\n\n"
+},
+
+{
+    "location": "library.html#ApproxFun.Laplacian",
+    "page": "Library",
+    "title": "ApproxFun.Laplacian",
+    "category": "Type",
+    "text": "Laplacian(sp::Space) represents the laplacian on space sp.\n\n\n\nLaplacian() represents the laplacian on an unset space. Spaces will be inferred when applying or manipulating the operator.\n\n\n\n"
+},
+
+{
+    "location": "library.html#ApproxFun.Multiplication",
+    "page": "Library",
+    "title": "ApproxFun.Multiplication",
+    "category": "Type",
+    "text": "Multiplication(f::Fun,sp::Space) is the operator representing multiplication by f on functions in the space sp.\n\n\n\nMultiplication(f::Fun) is the operator representing multiplication by f on an unset space of functions.  Spaces will be inferred when applying or manipulating the operator.\n\n\n\n"
+},
+
+{
+    "location": "library.html#Inbuilt-operators-1",
+    "page": "Library",
+    "title": "Inbuilt operators",
+    "category": "section",
+    "text": "ConversionDerivativeIntegralLaplacianMultiplication"
 },
 
 ]}
