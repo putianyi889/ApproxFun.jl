@@ -13,7 +13,87 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "ApproxFun.jl Documentation",
     "category": "section",
-    "text": "ApproxFun is a package for approximating and manipulating functions, and for solving differential and integral equations.  Pages = [\"usage/constructors.md\",\n         \"faq.md\",\n         \"library.md\"]"
+    "text": "ApproxFun is a package for approximating and manipulating functions, and for solving differential and integral equations.  Pages = [\"usage/constructors.md\",\n         \"usage/domains.md\",\n         \"usage/spaces.md\",\n         \"faq.md\",\n         \"library.md\"]"
+},
+
+{
+    "location": "usage/domains.html#",
+    "page": "Domains",
+    "title": "Domains",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "usage/domains.html#Domains-1",
+    "page": "Domains",
+    "title": "Domains",
+    "category": "section",
+    "text": "Domain is an abstract type whose subtypes represent oriented domains on which we wish to approximate functions.   Examples include Interval, Ray, Line and Arc.   Periodic domains include PeriodicInterval, PeriodicLine and Circle."
+},
+
+{
+    "location": "usage/domains.html#Relationship-with-spaces-1",
+    "page": "Domains",
+    "title": "Relationship with spaces",
+    "category": "section",
+    "text": "Every domain d has a default space, constructed via Space(d).  For example, the default space for Interval() is Chebyshev(Interval()), which is efficient for representing smooth functions.  On the other hand, the default space for PeriodicInterval() is Fourier(Interval()), which uses trigonometric polynomials to approximate periodic functions.  "
+},
+
+{
+    "location": "usage/domains.html#Manipulating-domains-1",
+    "page": "Domains",
+    "title": "Manipulating domains",
+    "category": "section",
+    "text": "Domains can be manipulated to make more complicated domains.  For example, you can take the union of an interval and a circleInterval() ∪ Circle(3,0.5)    # equivalent to union(Interval(),Circle(3,0.5))and the following creates a rectangle [0,1]^2:rect=Interval(0,1)^2Some other set operations are partially implemented:Interval(0,2) ∩ Interval() # returns Interval(0,1)"
+},
+
+{
+    "location": "usage/spaces.html#",
+    "page": "Spaces",
+    "title": "Spaces",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "usage/spaces.html#Spaces-1",
+    "page": "Spaces",
+    "title": "Spaces",
+    "category": "section",
+    "text": "A Space is an abstract type whose subtypes indicate which space a function lives in. This typically corresponds to the span of a (possibly infinite) basis."
+},
+
+{
+    "location": "usage/spaces.html#Chebyshev-space-1",
+    "page": "Spaces",
+    "title": "Chebyshev space",
+    "category": "section",
+    "text": "The default space in ApproxFun is Chebyshev, which represents expansions in Chebyshev polynomials:f(x) = sum_k=0^infty f_k T_k(x)where T_k(x) = cos k rm acos x.   Note that there is an intrinsic link between Chebyshev and CosSpace:  g(theta) = f(cos theta) = sum_k=0^infty f_k cos k thetaIn other words:f=Fun(exp,Chebyshev())\ng=Fun(CosSpace(),f.coefficients) # specify the coefficients directly\nf(cos(0.1)) ≈ g(0.1)"
+},
+
+{
+    "location": "usage/spaces.html#Ultraspherical-spaces-1",
+    "page": "Spaces",
+    "title": "Ultraspherical spaces",
+    "category": "section",
+    "text": "A key tool for solving differential equations are the ultraspherical spaces, which can be defined by the span of derivatives of Chebyshev polynomials.  Note that Ultraspherical(1) corresponds to the Chebyshev basis of the second kind: U_k(x) = sin (k+1) rm acos x over sin rm acos x.   The relationship with Chebyshev polynomials follows from trigonemetric identities: T_k(x) = k U_k-1(x).  Converting between ultraspherical polynomials (with integer orders) is extremely efficient: it requires O(n) operations, where n is the number of coefficients."
+},
+
+{
+    "location": "usage/spaces.html#Fourier-and-Laurent-spaces-1",
+    "page": "Spaces",
+    "title": "Fourier and Laurent spaces",
+    "category": "section",
+    "text": "There are several different spaces to represent functions on periodic domains, which are typically a PeriodicInterval, Circle or PeriodicLine.  CosSpace represents expansion in cosine series:f(theta) = sum_k=0^infty f_k cos k thetaSinSpace represents expansion in sine series:f(theta) = sum_k=0^infty f_k sin (k+1) thetaTaylor represents expansion with only non-negative complex exponential terms:f(theta) = sum_k=0^infty f_k rm e^rm i k thetaHardy{false} represents expansion with only negative complex exponential terms:f(theta) = sum_k=0^infty f_k rm e^-rm i (k+1) thetaFourier represents functions that are sums of sines and cosines.  Note that if a function has the formf(theta) = f_0 + sum_k=1^infty f_k^rm c cos k theta + f_k^rm s sin kthetathen the coefficients of the resulting Fun are order as f_0f_1^rm sf_1^rm c. For example:f = Fun(Fourier(),[1,2,3,4])\nf(0.1) ≈ 1 + 2sin(0.1) + 3cos(0.1) + 4sin(2*0.1)Laurent represents functions that are sums of complex exponentials.  Note that if a function has the formf(theta) = sum_k=-infty^infty f_k rm e^rm i k thetathen the coefficients of the resulting Fun are order as f_0f_-1f_1. For example:f = Fun(Fourier(),[1,2,3,4])\nf(0.1) ≈ 1 + 2exp(-im*0.1) + 3exp(im*0.1) + 4exp(-2im*0.1)"
+},
+
+{
+    "location": "usage/spaces.html#Modifier-spaces-1",
+    "page": "Spaces",
+    "title": "Modifier spaces",
+    "category": "section",
+    "text": "Some spaces are built out of other spaces.  A simple example is JacobiWeight(β,α,space) which weights space, which is typically Chebyshev() or Jacobi(b,a),  by a Jacobi weight (1+x)^β*(1-x)^a."
 },
 
 {
@@ -38,6 +118,14 @@ var documenterSearchIndex = {"docs": [
     "title": "Convenience constructors",
     "category": "section",
     "text": "The default space is Chebyshev, which can represent non-periodic functions on intervals.  Each Space type has a default domain: for Chebyshev this is -1..1, for Fourier and Laurent this is -π..π.  Thus the following are synonyms:Fun(exp,Chebyshev(Interval(-1,1)))\nFun(exp,Chebyshev(Interval()))\nFun(exp,Chebyshev(-1..1))\nFun(exp,Chebyshev())\nFun(exp,-1..1)\nFun(exp,Interval())\nFun(exp,Interval(-1,1))\nFun(exp)If a function is not specified, then it is taken to be identity.  Thus we have the following synonyms:x = Fun(identity,-1..1)\nx = Fun(-1..1)\nx = Fun(identity)\nx = Fun()"
+},
+
+{
+    "location": "usage/constructors.html#Specifying-coefficients-explicitly-1",
+    "page": "Constructors",
+    "title": "Specifying coefficients explicitly",
+    "category": "section",
+    "text": "It is sometimes necessary to specify coefficients explicitly.  This is possible via specifying the space followed by a vector of coefficients:f = Fun(Taylor(),[1,2,3])  # represents 1 + 2z + 3z^2"
 },
 
 {
@@ -321,6 +409,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "library.html#ApproxFun.Jacobi",
+    "page": "Library",
+    "title": "ApproxFun.Jacobi",
+    "category": "Type",
+    "text": "Jacobi(b,a) represents the space spanned by Jacobi polynomials P_k^{(a,b)}, which are orthogonal with respect to the weight (1+x)^β*(1-x)^α\n\n\n\n"
+},
+
+{
+    "location": "library.html#ApproxFun.Ultraspherical",
+    "page": "Library",
+    "title": "ApproxFun.Ultraspherical",
+    "category": "Type",
+    "text": "Ultraspherical(λ) is the space spanned by the ultraspherical polynomials\n\n    C_0^{(λ)}(x),C_1^{(λ)}(x),C_2^{(λ)}(x),…\n\nNote that λ=1 this reduces to Chebyshev polynomials of the second kind: C_k^{(1)}(x) = U_k(x).\n\n\n\n"
+},
+
+{
     "location": "library.html#ApproxFun.Taylor",
     "page": "Library",
     "title": "ApproxFun.Taylor",
@@ -369,14 +473,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#ApproxFun.Jacobi",
-    "page": "Library",
-    "title": "ApproxFun.Jacobi",
-    "category": "Type",
-    "text": "Jacobi(b,a) represents the space spanned by Jacobi polynomials P_k^{(a,b)}, which are orthogonal with respect to the weight (1+x)^β*(1-x)^α\n\n\n\n"
-},
-
-{
     "location": "library.html#ApproxFun.JacobiWeight",
     "page": "Library",
     "title": "ApproxFun.JacobiWeight",
@@ -413,7 +509,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Inbuilt spaces",
     "category": "section",
-    "text": "SequenceSpaceConstantSpaceChebyshevTaylorHardy{false}FourierLaurentCosSpaceSinSpaceJacobiJacobiWeightApproxFun.LogWeightApproxFun.ArraySpaceTensorSpace"
+    "text": "SequenceSpaceConstantSpaceChebyshevJacobiUltrasphericalTaylorHardy{false}FourierLaurentCosSpaceSinSpaceJacobiWeightApproxFun.LogWeightApproxFun.ArraySpaceTensorSpace"
 },
 
 {
