@@ -261,7 +261,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "ApproxFun.Arc",
     "category": "Type",
-    "text": "Arc(c,r,(θ₁,θ₂))\n\nrepresents the arc centred at c with radius r from angle θ₁ to θ₂. \n\n\n\n"
+    "text": "Arc(c,r,(θ₁,θ₂))\n\nrepresents the arc centred at c with radius r from angle θ₁ to θ₂.\n\n\n\n"
 },
 
 {
@@ -292,8 +292,8 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Interval",
     "page": "Library",
     "title": "ApproxFun.Interval",
-    "category": "Type",
-    "text": "Interval(a,b)\n\nrepresents an interval from a to b.  In the case where a and b are complex or 2-dimensional, it represents the line segment between a and b.\n\n\n\n"
+    "category": "Function",
+    "text": "Interval(a::Real,b::Real)\n\nrepresents the set {x : a ≤ x ≤ b}.\n\n\n\n"
 },
 
 {
@@ -446,22 +446,6 @@ var documenterSearchIndex = {"docs": [
     "title": "ApproxFun.Ultraspherical",
     "category": "Type",
     "text": "Ultraspherical(λ) is the space spanned by the ultraspherical polynomials\n\n    C_0^{(λ)}(x),C_1^{(λ)}(x),C_2^{(λ)}(x),…\n\nNote that λ=1 this reduces to Chebyshev polynomials of the second kind: C_k^{(1)}(x) = U_k(x).\n\n\n\n"
-},
-
-{
-    "location": "library.html#ApproxFun.Taylor",
-    "page": "Library",
-    "title": "ApproxFun.Taylor",
-    "category": "Constant",
-    "text": "Taylor() is the space spanned by [1,z,z^2,...].  This is a type alias for Hardy{true}.\n\n\n\n"
-},
-
-{
-    "location": "library.html#ApproxFun.Hardy",
-    "page": "Library",
-    "title": "ApproxFun.Hardy",
-    "category": "Type",
-    "text": "Hardy{false}() is the space spanned by [1/z,1/z^2,...]\n\n\n\n"
 },
 
 {
