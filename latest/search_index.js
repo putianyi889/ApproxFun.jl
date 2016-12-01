@@ -705,14 +705,6 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Base.:\\-Tuple{ApproxFun.Operator,Any}",
-    "page": "Library",
-    "title": "Base.:\\",
-    "category": "Method",
-    "text": "\\(A,b;tolerance=tol,maxlength=n)\n\nsolves a linear equation, usually differential equation, where A is an operator or array of operators and b is a Fun or array of funs.  The result u will approximately satisfy A*u = b.\n\n\n\n"
-},
-
-{
     "location": "library.html#Base.LinAlg.qrfact-Tuple{ApproxFun.Operator}",
     "page": "Library",
     "title": "Base.LinAlg.qrfact",
