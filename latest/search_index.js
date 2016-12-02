@@ -13,7 +13,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Home",
     "title": "ApproxFun.jl Documentation",
     "category": "section",
-    "text": "ApproxFun is a package for approximating and manipulating functions, and for solving differential and integral equations.  Pages = [\"usage/constructors.md\",\n         \"usage/domains.md\",\n         \"usage/spaces.md\",\n         \"usage/operators.md\",\n         \"faq.md\",\n         \"library.md\"]"
+    "text": "ApproxFun is a package for approximating and manipulating functions, and for solving differential and integral equations.  Pages = [\"usage/constructors.md\",\n         \"usage/domains.md\",\n         \"usage/spaces.md\",\n         \"usage/operators.md\",\n         \"usage/equations.md\",\n         \"faq.md\",\n         \"library.md\"]"
 },
 
 {
@@ -190,6 +190,62 @@ var documenterSearchIndex = {"docs": [
     "title": "Operators and space promotion",
     "category": "section",
     "text": "It is often more convenient to not specify a space explicitly, but rather infer it when the operator is used.  For example, we can construct Derivative(), which has the alias 𝒟, and represents the first derivative on any space:julia> f = Fun(cos,Chebyshev(0..1)); (𝒟*f)(0.1)\n-0.09983341664681707\n\njulia> f = Fun(cos,Fourier()); (𝒟*f)(0.1)\n-0.09983341664682804Behind the scenes, Derivative() is equivalent to Derivative(UnsetSpace(),1). When multiplying a function f, the domain space is promoted before multiplying, that is, Derivative()*f is equivalent to Derivative(space(f))*f.  This promotion of the domain space happens even when operators have spaces attached. This facilitates the following construction:julia> D = Derivative(Chebyshev());\n\njulia> D^2\nConcreteDerivative:Chebyshev(【-1.0,1.0】)→Ultraspherical(2,【-1.0,1.0】)\n 0.0  0.0  4.0                                           \n      0.0  0.0  6.0                                      \n           0.0  0.0  8.0                                 \n                0.0  0.0  10.0                           \n                     0.0   0.0  12.0                     \n                           0.0   0.0  14.0               \n                                 0.0   0.0  16.0         \n                                       0.0   0.0  18.0   \n                                             0.0   0.0  ⋱\n                                                   0.0  ⋱\n                                                        ⋱Note that rangespace(D) ≠ Chebyshev(), hence the operators are not compatible. Therefore, it has thrown away its domain space, and thus this is equivalent to Derivative(rangespace(D))*D.DocTestSetup = nothing"
+},
+
+{
+    "location": "usage/equations.html#",
+    "page": "Linear Equations",
+    "title": "Linear Equations",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "usage/equations.html#Linear-equations-1",
+    "page": "Linear Equations",
+    "title": "Linear equations",
+    "category": "section",
+    "text": "Linear equations such as ordinary and partial differential equations,  fractional differential equations and integral equations can be solved using ApproxFun. This is accomplished using A\\b where A is an Operator and b is a Fun.  As a simple example, consider the equationu(theta) + cu(theta) = costhetawhere we want a solution that is periodic on 02pi).  This can be solved succinctly as follows:DocTestSetup = quote\n    using ApproxFun\nendjulia> b = Fun(cos,Fourier());\n\njulia> c = 0.1; u = (𝒟+c*I)\\b;\n\njulia> u(0.6)\n0.64076835137228\n\njulia> (c*cos(0.6)+sin(0.6))/(1+c^2)  # exact solution\n0.6407683513722804Recall that 𝒟 is an alias to Derivative() == Derivative(UnsetSpace(),1).As another example, consider the Fredholm integral equation u + rm e^x int_-1^1 cos x u(x) rm dx = cos rm e^x We can solve this equation as follows:julia> Σ = DefiniteIntegral(Chebyshev()); x=Fun();\n\njulia> u = (I+exp(x)*Σ[cos(x)])\\cos(exp(x));\n\njulia> u(0.1)\n0.2186429485562879"
+},
+
+{
+    "location": "usage/equations.html#Boundary-conditions-1",
+    "page": "Linear Equations",
+    "title": "Boundary conditions",
+    "category": "section",
+    "text": "Incorporating boundary conditions into differential equations is important so that the equation is well-posed.  This is accomplished via combining operators and _functionals_ (i.e., 1 × ∞ operators).  As a simple example, consider the first order initial value problem u = t u qquadhboxandqquad u(0) = 1 To pose this in ApproxFun, we want to find a u such that Evaluation(0)*u == 1 and (𝒟 - t)*u == 0.  This is accomplished via:julia> t = Fun(0..1);\n\njulia> u = [Evaluation(0); 𝒟 - t]  \\ [1;0];\n\njulia> u(0)\n0.9999999999999996\n\njulia> norm(u'-t*u)\n6.455495187177958e-17Behind the scenes, the Vector{Operator{T}} representing the Functionals and operators are combined into a single InterlaceOperator.A common usage is two-point boundary value problems. Consider the singularly perturbed boundary value problem: epsilon u-xu+u = u qquad u(-1) = 1quad u(1) = 2 This can be solved in ApproxFun via:julia> x = Fun();\n\njulia> u = [Evaluation(-1);\n            Evaluation(1);\n            1/70*𝒟^2-x*𝒟+I] \\ [1,2,0];\n\njulia> u(0.1)\n0.04999999999996024Note in this case the space is inferred from the variable coefficient x."
+},
+
+{
+    "location": "usage/equations.html#Systems-of-equations-1",
+    "page": "Linear Equations",
+    "title": "Systems of equations",
+    "category": "section",
+    "text": "Systems of equations can be handled by creating a matrix of operators and functionals.  For example, we can solve the systembeginalign*\n    u - u + 2v = rm e^x  cr\n    v + v = rm e^x  cr\n    u(-1) = u(-1) = v(-1) = 0\nendalign*This can be solved via:julia> x = Fun(); B = Evaluation(Chebyshev(),-1);\n\njulia> A = [B      0;\n            B*𝒟    0;\n            0      B;\n            𝒟^2-I  2I;\n            I      𝒟+I];\n\njulia> u,v = A\\[0;0;0;exp(x);cos(x)];\n\njulia> u(-1),u'(-1),v(-1)\n(6.938893903907228e-17,-2.7755575615628914e-16,0.0)\n\njulia> norm(u''-u+2v-exp(x))\n6.957393606436152e-16\n\njulia> norm(u + v'+v-cos(x))\n2.878538423331588e-16In this example, the automatic space detection failed and so we needed to specify the domain space for B."
+},
+
+{
+    "location": "usage/equations.html#QR-Factorization-1",
+    "page": "Linear Equations",
+    "title": "QR Factorization",
+    "category": "section",
+    "text": "Behind the scenes, A\\b where A is an Operator is implemented via an adaptive QR factorization.  That is, it is equivalent to qrfact(A)\\b.  Note that qrfact adaptively caches a partial QR Factorization as it is applied to different right-hand sides, so the same operator can be inverted much more efficiently in subsequent problems."
+},
+
+{
+    "location": "usage/equations.html#Partial-differential-equations-1",
+    "page": "Linear Equations",
+    "title": "Partial differential equations",
+    "category": "section",
+    "text": "Partial differential operators are also supported.  Here's an example of solving the Poisson equation with zero boundary conditions:d = (-1..1)^2\nx,y = Fun(d)\nf = exp.(-10(x+0.3)^2-20(y-0.2)^2)  # use broadcasting as exp(f) not implemented in 2D\nA = [Dirichlet(d);Δ]              # Δ is an alias for Laplacian()\n@time u = A \\ [zeros(∂(d));f]     #4s for ~3k coefficientsThis equation requires a tolerance to be solved in a reasonable amount of time as there are weak singularities at the corners.  Using a QR Factorization reduces the cost of subsequent calls substantially:QR = qrfact(A)\n@time QR \\ [zeros(∂(d));f]   # 4s\ng = exp.(-10(x+0.2)^2-20(y-0.1)^2)\n@time \\(QR,[zeros(∂(d));g];tolerance=1E-10)  # 0.09sThese timings are far from optimal, mostly due to the cost of Optimization of partial differential equations is currently work in progress."
+},
+
+{
+    "location": "usage/equations.html#Nonlinear-equations-1",
+    "page": "Linear Equations",
+    "title": "Nonlinear equations",
+    "category": "section",
+    "text": ""
 },
 
 {
