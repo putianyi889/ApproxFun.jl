@@ -761,11 +761,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#Base.:\\-Tuple{ApproxFun.Operator,ApproxFun.Fun}",
+    "location": "library.html#Base.:\\-Tuple{ApproxFun.Operator,Any}",
     "page": "Library",
     "title": "Base.:\\",
     "category": "Method",
-    "text": "\\(A,b;tolerance=tol,maxlength=n)\n\nsolves a linear equation, usually differential equation, where A is an operator or array of operators and b is a Fun or array of funs.  The result u will approximately satisfy A*u = b.\n\n\n\n"
+    "text": "\\(A::Operator,b;tolerance=tol,maxlength=n)\n\nsolves a linear equation, usually differential equation, where A is an operator or array of operators and b is a Fun or array of funs.  The result u will approximately satisfy A*u = b.\n\n\n\n"
 },
 
 {
@@ -789,7 +789,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Operators",
     "category": "section",
-    "text": "OperatorBandedMatrices.bandwidths(::Operator)domainspacerangespaceBase.getindex(::Operator,::,::)\\(::Operator,::Fun)qrfact(::Operator)cache(::Operator)"
+    "text": "OperatorBandedMatrices.bandwidths(::Operator)domainspacerangespaceBase.getindex(::Operator,::,::)\\(::Operator,::)qrfact(::Operator)cache(::Operator)"
 },
 
 {
