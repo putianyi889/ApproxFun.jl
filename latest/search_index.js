@@ -221,7 +221,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Equations",
     "title": "Linear equations",
     "category": "section",
-    "text": "Linear equations such as ordinary and partial differential equations,  fractional differential equations and integral equations can be solved using ApproxFun. This is accomplished using A\\b where A is an Operator and b is a Fun.  As a simple example, consider the equationu(theta) + cu(theta) = costhetawhere we want a solution that is periodic on 02pi).  This can be solved succinctly as follows:DocTestSetup = quote\n    using ApproxFun\nendjulia> b = Fun(cos,Fourier());\n\njulia> c = 0.1; u = (𝒟+c*I)\\b;\n\njulia> u(0.6)\n0.64076835137228\n\njulia> (c*cos(0.6)+sin(0.6))/(1+c^2)  # exact solution\n0.6407683513722804Recall that 𝒟 is an alias to Derivative() == Derivative(UnsetSpace(),1).As another example, consider the Fredholm integral equationu + rm e^x int_-1^1 cos x  u(x) rm dx = cos rm e^xWe can solve this equation as follows:julia> Σ = DefiniteIntegral(Chebyshev()); x=Fun();\n\njulia> u = (I+exp(x)*Σ[cos(x)])\\cos(exp(x));\n\njulia> u(0.1)\n0.21864294855628802"
+    "text": "Linear equations such as ordinary and partial differential equations,  fractional differential equations and integral equations can be solved using ApproxFun. This is accomplished using A\\b where A is an Operator and b is a Fun.  As a simple example, consider the equationu(theta) + cu(theta) = costhetawhere we want a solution that is periodic on 02pi).  This can be solved succinctly as follows:DocTestSetup = quote\n    using ApproxFun\nendjulia> b = Fun(cos,Fourier());\n\njulia> c = 0.1; u = (𝒟+c*I)\\b;\n\njulia> u(0.6)\n0.64076835137228\n\njulia> (c*cos(0.6)+sin(0.6))/(1+c^2)  # exact solution\n0.6407683513722804Recall that 𝒟 is an alias to Derivative() == Derivative(UnsetSpace(),1).As another example, consider the Fredholm integral equationu + rm e^x int_-1^1 cos x  u(x) rm dx = cos rm e^xWe can solve this equation as follows:julia> Σ = DefiniteIntegral(Chebyshev()); x=Fun();\n\njulia> u = (I+exp(x)*Σ[cos(x)])\\cos(exp(x));\n\njulia> u(0.1)\n0.21864294855628802Note that we used the syntax op[f::Fun], which is a shorthand for op*Multiplication(f)."
 },
 
 {
@@ -777,6 +777,14 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "library.html#Base.getindex-Tuple{ApproxFun.Operator,ApproxFun.Fun}",
+    "page": "Library",
+    "title": "Base.getindex",
+    "category": "Method",
+    "text": "op[f::Fun]\n\nconstructs the operator op*Multiplication(f), that is, it multiplies on the right by f first.  Note that op*f is different: it applies op to f.\n\n\n\n"
+},
+
+{
     "location": "library.html#Base.:\\-Tuple{ApproxFun.Operator,Any}",
     "page": "Library",
     "title": "Base.:\\",
@@ -805,7 +813,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Operators",
     "category": "section",
-    "text": "OperatorBandedMatrices.bandwidths(::Operator)domainspacerangespaceBase.getindex(::Operator,::,::)\\(::Operator,::)qrfact(::Operator)cache(::Operator)"
+    "text": "OperatorBandedMatrices.bandwidths(::Operator)domainspacerangespaceBase.getindex(::Operator,::,::)Base.getindex(::Operator,::Fun)\\(::Operator,::)qrfact(::Operator)cache(::Operator)"
 },
 
 {
