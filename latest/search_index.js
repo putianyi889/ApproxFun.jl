@@ -133,7 +133,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Constructors",
     "title": "Constructors",
     "category": "section",
-    "text": "Funs in ApproxFun are instances of Julia types with one field to store coefficients and another to describe the function space. Similarly, each function space has one field describing its domain, or another function space. Let's explore:DocTestSetup = quote\n    using ApproxFun\nendjulia> x = Fun(identity,-1..1);\n\njulia> f = exp(x);\n\njulia> g = f/sqrt(1-x^2);\n\njulia> space(f)   # Output is pretty version of Chebyshev(Interval(-1.0,1.0))\nChebyshev(【-1.0,1.0】)\n\njulia> space(g)   # Output is pretty version of  JacobiWeight(-0.5,-0.5,Interval(-1.0,1.0))\n(1-x^2)^-0.5[Chebyshev(【-1.0,1.0】)]The absolute value is another case where the space of the output is inferred from the operation:julia> f = Fun(x->cospi(5x),-1..1);\n\njulia> g = abs(f);\n\njulia> space(f)   \nChebyshev(【-1.0,1.0】)\n\njulia> space(g)\nChebyshev(【-1.0,-0.9000000000000002】)⨄Chebyshev(【-0.9000000000000002,-0.6999999999999996】)⨄Chebyshev(【-0.6999999999999996,-0.5000000000000001】)⨄Chebyshev(【-0.5000000000000001,-0.30000000000000043】)⨄Chebyshev(【-0.30000000000000043,-0.09999999999999962】)⨄Chebyshev(【-0.09999999999999962,0.10000000000000053】)⨄Chebyshev(【0.10000000000000053,0.29999999999999966】)⨄Chebyshev(【0.29999999999999966,0.500000000000001】)⨄Chebyshev(【0.500000000000001,0.6999999999999998】)⨄Chebyshev(【0.6999999999999998,0.9000000000000006】)⨄Chebyshev(【0.9000000000000006,1.0】)"
+    "text": "Funs in ApproxFun are instances of Julia types with one field to store coefficients and another to describe the function space. Similarly, each function space has one field describing its domain, or another function space. Let's explore:DocTestSetup = quote\n    using ApproxFun\nendjulia> x = Fun(identity,-1..1);\n\njulia> f = exp(x);\n\njulia> g = f/sqrt(1-x^2);\n\njulia> space(f)   # Output is pretty version of Chebyshev(Interval(-1.0,1.0))\nChebyshev(【-1.0,1.0】)\n\njulia> space(g)   # Output is pretty version of  JacobiWeight(-0.5,-0.5,Interval(-1.0,1.0))\n(1-x^2)^-0.5[Chebyshev(【-1.0,1.0】)]The absolute value is another case where the space of the output is inferred from the operation:julia> f = Fun(x->cospi(5x),-1..1);\n\njulia> g = abs(f);\n\njulia> space(f)\nChebyshev(【-1.0,1.0】)\n\njulia> space(g)\nChebyshev(【-1.0,-0.9000000000000002】)⨄Chebyshev(【-0.9000000000000002,-0.6999999999999996】)⨄Chebyshev(【-0.6999999999999996,-0.5000000000000001】)⨄Chebyshev(【-0.5000000000000001,-0.30000000000000043】)⨄Chebyshev(【-0.30000000000000043,-0.09999999999999962】)⨄Chebyshev(【-0.09999999999999962,0.10000000000000053】)⨄Chebyshev(【0.10000000000000053,0.29999999999999966】)⨄Chebyshev(【0.29999999999999966,0.500000000000001】)⨄Chebyshev(【0.500000000000001,0.6999999999999998】)⨄Chebyshev(【0.6999999999999998,0.9000000000000006】)⨄Chebyshev(【0.9000000000000006,1.0】)"
 },
 
 {
@@ -149,7 +149,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Constructors",
     "title": "Specifying coefficients explicitly",
     "category": "section",
-    "text": "It is sometimes necessary to specify coefficients explicitly.  This is possible via specifying the space followed by a vector of coefficients:julia> f = Fun(Taylor(),[1,2,3]);  # represents 1 + 2z + 3z^2\n\njulia> f(0.1)\n1.23\n\njulia> 1+2*0.1+3*0.1^2\n1.23"
+    "text": "It is sometimes necessary to specify coefficients explicitly.  This is possible via specifying the space followed by a vector of coefficients:julia> f = Fun(Taylor(),[1,2,3]);  # represents 1 + 2z + 3z^2\n\njulia> f(0.1)\n1.23\n\njulia> 1+2*0.1+3*0.1^2\n1.23In higher dimensions, ApproxFun will sum products of the 1D basis functions. So if T_i(x) is the ith basis function, then a 2D function can be approximated as the following: f(x  y) = sum_i j c_ij  T_i(x)  T_j(y)The products will be ordered lexicographically by the degree of the polynomial, i.e. in the order T_0(x)  T_0(y)  T_0(x)  T_1(y)   T_1(x)  T_0(y)   T_0(x)  T_2(y)   T_1(x)  T_1(y)   T_2(x)  T_0(y)    . For example, if we are in the two dimensional CosSpace space and we have coefficients c_1 c_2 c_3, then $ f(x, y) = c_1 \\cos(0 x) \\cos(0 y) + c_2 \\cos(0 x) \\cos(1 y) + c_3 \\cos(1 x) \\cos(0 y). $This is illustrated in the following code:julia> f = Fun(CosSpace()^2, [1,2,3])\nFun(CosSpace(【0.0,6.283185307179586❫)⊗CosSpace(【0.0,6.283185307179586❫),[1.0,2.0,3.0])\n\njulia> f(1,2)\n1.7886132445101346\n\njulia> 1cos(0*1)*cos(0*2) + 2cos(0*1)*cos(1*2) + 3cos(1*1)*cos(0*2)\n1.7886132445101346"
 },
 
 {
@@ -189,7 +189,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Operators",
     "title": "Functionals",
     "category": "section",
-    "text": "A particularly useful class of operators are _functionals_, which map from functions to scalar numbers.  These are represented by operators of size 1 × ∞: that is, infinite-dimensional analogues of row vectors.As an example, the evaluation functional f(0) on CosSpace has the form:julia> B = Evaluation(CosSpace(),0)\nConcreteEvaluation:CosSpace(【0.0,6.283185307179586❫)→ConstantSpace(Point(0))\n 1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  ⋯\n\njulia> B*f ≈ f(0)\ntrueAs can be seen from the output, rangespace(B) is a ConstantSpace(Point(0)), a one-dimensional space used to represent scalars whose domain is a single point, 0."
+    "text": "A particularly useful class of operators are _functionals_, which map from functions to scalar numbers.  These are represented by operators of size 1 × ∞: that is, infinite-dimensional analogues of row vectors.As an example, the evaluation functional f(0) on CosSpace has the form:julia> B = Evaluation(CosSpace(),0)\nConcreteEvaluation:CosSpace(【0.0,6.283185307179586❫)→ConstantSpace(Point(0))\n 1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  ⋯\n\njulia> B*f ≈ f(0)\ntrueAs can be seen from the output, rangespace(B) is a ConstantSpace(Point(0)), a one-dimensional space used to represent scalars whose domain is a single point, 0.Closely related to functionals are operators with finite-dimensional range. For example, the Dirichlet operator represents the restriction of a space to its boundary. In the case, of Chebyshev(), this amounts to evaluation at the endpoints ±1:julia> B = Dirichlet(Chebyshev())\nConcreteDirichlet:Chebyshev(【-1.0,1.0】)→2-element ArraySpace:\n ConstantSpace(Point(-1.0))\n ConstantSpace(Point(1.0))\n 1.0  -1.0  1.0  -1.0  1.0  -1.0  1.0  -1.0  1.0  -1.0  ⋯\n 1.0   1.0  1.0   1.0  1.0   1.0  1.0   1.0  1.0   1.0  ⋯\n\njulia> size(B)\n(2, ∞)\n\njulia> B*Fun(exp)\nFun(2-element ArraySpace:\n ConstantSpace(Point(-1.0))\n ConstantSpace(Point(1.0)) ,[0.367879, 2.71828])\n\njulia> B*Fun(exp) ≈ Fun([exp(-1),exp(1)])\ntrue"
 },
 
 {
@@ -206,6 +206,14 @@ var documenterSearchIndex = {"docs": [
     "title": "Operators and space promotion",
     "category": "section",
     "text": "It is often more convenient to not specify a space explicitly, but rather infer it when the operator is used.  For example, we can construct Derivative(), which has the alias 𝒟, and represents the first derivative on any space:julia> f = Fun(cos,Chebyshev(0..1)); (𝒟*f)(0.1)\n-0.09983341664681705\n\njulia> f = Fun(cos,Fourier()); (𝒟*f)(0.1)\n-0.09983341664682804Behind the scenes, Derivative() is equivalent to Derivative(UnsetSpace(),1). When multiplying a function f, the domain space is promoted before multiplying, that is, Derivative()*f is equivalent to Derivative(space(f))*f.  This promotion of the domain space happens even when operators have spaces attached. This facilitates the following construction:julia> D = Derivative(Chebyshev());\n\njulia> D^2\nConcreteDerivative:Chebyshev(【-1.0,1.0】)→Ultraspherical(2,【-1.0,1.0】)\n 0.0  0.0  4.0                                           \n      0.0  0.0  6.0                                      \n           0.0  0.0  8.0                                 \n                0.0  0.0  10.0                           \n                     0.0   0.0  12.0                     \n                           0.0   0.0  14.0               \n                                 0.0   0.0  16.0         \n                                       0.0   0.0  18.0   \n                                             0.0   0.0  ⋱\n                                                   0.0  ⋱\n                                                        ⋱Note that rangespace(D) ≠ Chebyshev(), hence the operators are not compatible. Therefore, it has thrown away its domain space, and thus this is equivalent to Derivative(rangespace(D))*D.DocTestSetup = nothing"
+},
+
+{
+    "location": "usage/operators.html#Concatenating-operators-1",
+    "page": "Operators",
+    "title": "Concatenating operators",
+    "category": "section",
+    "text": "The concatenation functions vcat, hcat and hvcat are overriden for operators to represent the resulting combined operator, now with a rangespace or domainspace that is an ArraySpace. "
 },
 
 {
@@ -229,7 +237,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Linear Equations",
     "title": "Boundary conditions",
     "category": "section",
-    "text": "Incorporating boundary conditions into differential equations is important so that the equation is well-posed.  This is accomplished via combining operators and functionals (i.e., 1 × ∞ operators).  As a simple example, consider the first order initial value problemu = t u qquadhboxandqquad u(0) = 1To pose this in ApproxFun, we want to find a u such that Evaluation(0)*u == 1 and (𝒟 - t)*u == 0.  This is accomplished via:julia> t = Fun(0..1);\n\njulia> u = [Evaluation(0); 𝒟 - t]  \\ [1;0];\n\njulia> u(0)\n0.9999999999999996\n\njulia> norm(u'-t*u)\n1.2016080299388273e-16Behind the scenes, the Vector{Operator{T}} representing the functionals and operators are combined into a single InterlaceOperator.A common usage is two-point boundary value problems. Consider the singularly perturbed boundary value problem:epsilon u-xu+u = u qquad u(-1) = 1quad u(1) = 2This can be solved in ApproxFun via:julia> x = Fun();\n\njulia> u = [Evaluation(-1);\n            Evaluation(1);\n            1/70*𝒟^2-x*𝒟+I] \\ [1,2,0];\n\njulia> u(0.1)\n0.049999999999960326Note in this case the space is inferred from the variable coefficient x."
+    "text": "Incorporating boundary conditions into differential equations is important so that the equation is well-posed.  This is accomplished via combining operators and functionals (i.e., 1 × ∞ operators).  As a simple example, consider the first order initial value problemu = t u qquadhboxandqquad u(0) = 1To pose this in ApproxFun, we want to find a u such that Evaluation(0)*u == 1 and (𝒟 - t)*u == 0.  This is accomplished via:julia> t = Fun(0..1);\n\njulia> u = [Evaluation(0); 𝒟 - t]  \\ [1;0];\n\njulia> u(0)\n0.9999999999999996\n\njulia> norm(u'-t*u)\n1.2016080299388273e-16Behind the scenes, the Vector{Operator{T}} representing the functionals and operators are combined into a single InterlaceOperator.A common usage is two-point boundary value problems. Consider the singularly perturbed boundary value problem:epsilon u-xu+u = u qquad u(-1) = 1quad u(1) = 2This can be solved in ApproxFun via:julia> x = Fun();\n\njulia> u = [Evaluation(-1);\n            Evaluation(1);\n            1/70*𝒟^2-x*𝒟+I] \\ [1,2,0];\n\njulia> u(0.1)\n0.049999999999960326Note in this case the space is inferred from the variable coefficient x.This ODE can also be solved using the Dirichlet operator:julia> x = Fun();\n\njulia> u = [Dirichlet();\n            1/70*𝒟^2-x*𝒟+I] \\ [[1,2],0];\n\njulia> u(0.1)\n0.04999999999996019"
 },
 
 {
@@ -317,7 +325,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "ApproxFun.Fun",
     "category": "Type",
-    "text": "Fun(s::Space,coefficients::Vector)\n\nreturns a Fun with the specified coefficients in the space s\n\n\n\nFun(f,s::Space)\n\nreturn a Fun representing the function, number, or vector f in the space s.  If f is vector-valued, it returns a vector-valued analogue of s.\n\n\n\nFun(f,d::Domain)\n\nreturns Fun(f,Space(d)), that is, it uses the default space for the specified domain.\n\n\n\nFun(s::Space)\n\nreturns Fun(identity,s)\n\n\n\nFun(f)\n\nreturns Fun(f,Chebyshev())\n\n\n\nFun()\n\nreturns Fun(identity,Chebyshev()).\n\n\n\n"
+    "text": "Fun(s::Space,coefficients::AbstractVector)\n\nreturns a Fun with the specified coefficients in the space s\n\n\n\nFun(f,s::Space)\n\nreturn a Fun representing the function, number, or vector f in the space s.  If f is vector-valued, it returns a vector-valued analogue of s.\n\n\n\nFun(f,d::Domain)\n\nreturns Fun(f,Space(d)), that is, it uses the default space for the specified domain.\n\n\n\nFun(s::Space)\n\nreturns Fun(identity,s)\n\n\n\nFun(f)\n\nreturns Fun(f,Chebyshev())\n\n\n\nFun()\n\nreturns Fun(identity,Chebyshev()).\n\n\n\n"
 },
 
 {
@@ -364,7 +372,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Curve",
     "page": "Library",
     "title": "ApproxFun.Curve",
-    "category": "Constant",
+    "category": "Type",
     "text": "Curve Represents a domain defined by the image of a Fun.  Example usage would be\n\nx=Fun(1..2)\nCurve(exp(im*x))  # represents an arc\n\n\n\n"
 },
 
@@ -469,7 +477,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "ApproxFun.itransform",
     "category": "Function",
-    "text": "itransform(s::Space,coefficients::Vector)\n\nTransform coefficients back to values.  Defaults to using canonicalspace as in transform.\n\n\n\n"
+    "text": "itransform(s::Space,coefficients::AbstractVector)\n\nTransform coefficients back to values.  Defaults to using canonicalspace as in transform.\n\n\n\n"
 },
 
 {
@@ -481,11 +489,11 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "library.html#ApproxFun.evaluate-Tuple{ApproxFun.Space,Array{T,1},Any}",
+    "location": "library.html#ApproxFun.evaluate-Tuple{ApproxFun.Space,AbstractArray{T,1} where T,Any}",
     "page": "Library",
     "title": "ApproxFun.evaluate",
     "category": "Method",
-    "text": "evaluate(sp::Space,coefficients::Vector,x)\n\nEvaluates the expansion at a point x. If x is in the domain, then this should return zero.\n\n\n\n"
+    "text": "evaluate(sp::Space,coefficients::AbstractVector,x)\n\nEvaluates the expansion at a point x. If x is in the domain, then this should return zero.\n\n\n\n"
 },
 
 {
@@ -501,7 +509,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "Accessing information about a spaces",
     "category": "section",
-    "text": "ApproxFun.canonicalspaceitransformtransformevaluate(::Space,::Vector,::)ApproxFun.dimension(::Space)"
+    "text": "ApproxFun.canonicalspaceitransformtransformevaluate(::Space,::AbstractVector,::)ApproxFun.dimension(::Space)"
 },
 
 {
@@ -548,7 +556,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Taylor",
     "page": "Library",
     "title": "ApproxFun.Taylor",
-    "category": "Constant",
+    "category": "Type",
     "text": "Taylor() is the space spanned by [1,z,z^2,...]. This is a type alias for Hardy{true}.\n\n\n\n"
 },
 
@@ -564,7 +572,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Fourier",
     "page": "Library",
     "title": "ApproxFun.Fourier",
-    "category": "Constant",
+    "category": "Type",
     "text": "Fourier() is the space spanned by the trigonemtric polynomials\n\n    1,sin(θ),cos(θ),sin(2θ),cos(2θ),…\n\nSee also Laurent.\n\n\n\n"
 },
 
@@ -572,7 +580,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Laurent",
     "page": "Library",
     "title": "ApproxFun.Laurent",
-    "category": "Constant",
+    "category": "Type",
     "text": "Laurent() is the space spanned by the complex exponentials\n\n    1,exp(-im*θ),exp(im*θ),exp(-2im*θ),…\n\nSee also Fourier.\n\n\n\n"
 },
 
@@ -645,7 +653,7 @@ var documenterSearchIndex = {"docs": [
     "page": "Library",
     "title": "ApproxFun.coefficients",
     "category": "Function",
-    "text": "coefficients(f::Fun) -> Vector\n\nreturns the coefficients of f, corresponding to the space space(f).\n\n\n\ncoefficients(f::Fun,s::Space) -> Vector\n\nreturns the coefficients of f in the space s, which may not be the same as space(f).\n\n\n\ncoefficients(cfs::Vector,fromspace::Space,tospace::Space) -> Vector\n\nconverts coefficients in fromspace to coefficients in tospace\n\n\n\n"
+    "text": "coefficients(f::Fun) -> Vector\n\nreturns the coefficients of f, corresponding to the space space(f).\n\n\n\ncoefficients(f::Fun,s::Space) -> Vector\n\nreturns the coefficients of f in the space s, which may not be the same as space(f).\n\n\n\ncoefficients(cfs::AbstractVector,fromspace::Space,tospace::Space) -> Vector\n\nconverts coefficients in fromspace to coefficients in tospace\n\n\n\n"
 },
 
 {
@@ -833,6 +841,22 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "library.html#ApproxFun.Dirichlet",
+    "page": "Library",
+    "title": "ApproxFun.Dirichlet",
+    "category": "Type",
+    "text": "Dirichlet(sp,k) is the operator associated with restricting the k-th derivative on the boundary for the space sp.\n\n\n\nDirichlet(sp) is the operator associated with restricting the  the boundary for the space sp.\n\n\n\nDirichlet() is the operator associated with restricting on the  the boundary.\n\n\n\n"
+},
+
+{
+    "location": "library.html#ApproxFun.Evaluation",
+    "page": "Library",
+    "title": "ApproxFun.Evaluation",
+    "category": "Type",
+    "text": "Evaluation(sp,x,k) is the functional associated with evaluating the k-th derivative at a point x for the space sp.\n\n\n\nEvaluation(sp,x) is the functional associated with evaluating at a point x for the space sp.\n\n\n\nEvaluation(x) is the functional associated with evaluating at a point x.\n\n\n\n"
+},
+
+{
     "location": "library.html#ApproxFun.Integral",
     "page": "Library",
     "title": "ApproxFun.Integral",
@@ -857,11 +881,19 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
+    "location": "library.html#ApproxFun.Neumann",
+    "page": "Library",
+    "title": "ApproxFun.Neumann",
+    "category": "Function",
+    "text": "Neumann(sp) is the operator associated with restricting the normal derivative on the boundary for the space sp. At the moment it is implemented as Dirichlet(sp,1).\n\n\n\n`Neumann( is the operator associated with restricting the normal derivative on the boundary.\n\n\n\n"
+},
+
+{
     "location": "library.html#Inbuilt-operators-1",
     "page": "Library",
     "title": "Inbuilt operators",
     "category": "section",
-    "text": "ConversionDerivativeIntegralLaplacianMultiplication"
+    "text": "ConversionDerivativeDirichletEvaluationIntegralLaplacianMultiplicationNeumann"
 },
 
 {
