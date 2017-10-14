@@ -372,7 +372,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Curve",
     "page": "Library",
     "title": "ApproxFun.Curve",
-    "category": "Type",
+    "category": "Constant",
     "text": "Curve Represents a domain defined by the image of a Fun.  Example usage would be\n\nx=Fun(1..2)\nCurve(exp(im*x))  # represents an arc\n\n\n\n"
 },
 
