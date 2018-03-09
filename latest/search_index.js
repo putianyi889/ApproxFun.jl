@@ -324,7 +324,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Fun",
     "page": "Library",
     "title": "ApproxFun.Fun",
-    "category": "Type",
+    "category": "type",
     "text": "Fun(s::Space,coefficients::AbstractVector)\n\nreturns a Fun with the specified coefficients in the space s\n\n\n\nFun(f,s::Space)\n\nreturn a Fun representing the function, number, or vector f in the space s.  If f is vector-valued, it returns a vector-valued analogue of s.\n\n\n\nFun(f,d::Domain)\n\nreturns Fun(f,Space(d)), that is, it uses the default space for the specified domain.\n\n\n\nFun(s::Space)\n\nreturns Fun(identity,s)\n\n\n\nFun(f)\n\nreturns Fun(f,Chebyshev())\n\n\n\nFun()\n\nreturns Fun(identity,Chebyshev()).\n\n\n\n"
 },
 
@@ -332,7 +332,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#Base.ones-Tuple{ApproxFun.Space}",
     "page": "Library",
     "title": "Base.ones",
-    "category": "Method",
+    "category": "method",
     "text": "ones(d::Space)\n\nReturn the Fun that represents the function one on the specified space.\n\n\n\n"
 },
 
@@ -340,7 +340,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#Base.zeros-Tuple{ApproxFun.Space}",
     "page": "Library",
     "title": "Base.zeros",
-    "category": "Method",
+    "category": "method",
     "text": "zeros(d::Space)\n\nReturn the Fun that represents the function one on the specified space.\n\n\n\n"
 },
 
@@ -356,7 +356,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Arc",
     "page": "Library",
     "title": "ApproxFun.Arc",
-    "category": "Type",
+    "category": "type",
     "text": "Arc(c,r,(θ₁,θ₂))\n\nrepresents the arc centred at c with radius r from angle θ₁ to θ₂.\n\n\n\n"
 },
 
@@ -364,7 +364,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Circle",
     "page": "Library",
     "title": "ApproxFun.Circle",
-    "category": "Type",
+    "category": "type",
     "text": "Circle(c,r,o)\n\nrepresents the circle centred at c with radius r which is positively (o=true) or negatively (o=false) oriented.\n\n\n\n"
 },
 
@@ -372,7 +372,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Curve",
     "page": "Library",
     "title": "ApproxFun.Curve",
-    "category": "Constant",
+    "category": "constant",
     "text": "Curve Represents a domain defined by the image of a Fun.  Example usage would be\n\nx=Fun(1..2)\nCurve(exp(im*x))  # represents an arc\n\n\n\n"
 },
 
@@ -380,7 +380,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Disk",
     "page": "Library",
     "title": "ApproxFun.Disk",
-    "category": "Type",
+    "category": "type",
     "text": "Disk(c,r)\n\nrepresents the disk centred at c with radius r.\n\n\n\n"
 },
 
@@ -388,7 +388,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Segment",
     "page": "Library",
     "title": "ApproxFun.Segment",
-    "category": "Type",
+    "category": "type",
     "text": "Segment(a,b)\n\nrepresents a line segment from a to b.  In the case where a and b are real and a < b, then this is is equivalent to an Interval(a,b).\n\n\n\n"
 },
 
@@ -396,7 +396,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Interval",
     "page": "Library",
     "title": "ApproxFun.Interval",
-    "category": "Function",
+    "category": "function",
     "text": "Interval(a::Real,b::Real)\n\nrepresents the set {x : a ≤ x ≤ b}.\n\n\n\n"
 },
 
@@ -404,7 +404,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Line",
     "page": "Library",
     "title": "ApproxFun.Line",
-    "category": "Type",
+    "category": "type",
     "text": "Line{a}(c)\n\nrepresents the line at angle a in the complex plane, centred at c.\n\n\n\n"
 },
 
@@ -412,7 +412,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.PeriodicInterval",
     "page": "Library",
     "title": "ApproxFun.PeriodicInterval",
-    "category": "Type",
+    "category": "type",
     "text": "PeriodicInterval(a,b)\n\nrepresents a periodic interval from a to b, that is, the point b is identified with a.\n\n\n\n"
 },
 
@@ -420,7 +420,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Point",
     "page": "Library",
     "title": "ApproxFun.Point",
-    "category": "Type",
+    "category": "type",
     "text": "Point(x)\n\nrepresents a single point at x.\n\n\n\n"
 },
 
@@ -428,7 +428,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.ProductDomain",
     "page": "Library",
     "title": "ApproxFun.ProductDomain",
-    "category": "Type",
+    "category": "type",
     "text": "ProductDomain((d1,d2))\n\nrepresents the product of two domains, the set {(x,y) : x ∈ d1 & y ∈ d2}.\n\nMultiplication of domains is overrident to return a ProductDomain. For example, the following represents the rectangle 1 ≤ x ≤ 2 & 3 ≤ y ≤ 4:\n\nInterval(1,2)*(3,4)\n\n\n\n"
 },
 
@@ -436,7 +436,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Ray",
     "page": "Library",
     "title": "ApproxFun.Ray",
-    "category": "Type",
+    "category": "type",
     "text": "Ray{a}(c,o)\n\nrepresents a ray at angle a starting at c, with orientation out to infinity (o = true) or back from infinity (o = false).\n\n\n\n"
 },
 
@@ -444,7 +444,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.UnionDomain",
     "page": "Library",
     "title": "ApproxFun.UnionDomain",
-    "category": "Type",
+    "category": "type",
     "text": "UnionDomain((d1,d2,…,dn))\n\nrepresents a union of multiple subdomains: {x : x ∈ d1 || … || x ∈ dn}.\n\n\n\n"
 },
 
@@ -452,7 +452,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.∂",
     "page": "Library",
     "title": "ApproxFun.∂",
-    "category": "Function",
+    "category": "function",
     "text": "∂(d::Domain)\n\nreturns the boundary of d.  For example, the boundary of a Disk() is a Circle(), and the boundary of Interval()^2 is a piecewise interval that sketches the boundary of a rectangle.\n\n\n\n"
 },
 
@@ -468,7 +468,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.canonicalspace",
     "page": "Library",
     "title": "ApproxFun.canonicalspace",
-    "category": "Function",
+    "category": "function",
     "text": "canonicalspace(s::Space)\n\nreturns a space that is used as a default to implement missing functionality, e.g., evaluation.  Implement a Conversion operator or override coefficients to support this.\n\n\n\n"
 },
 
@@ -476,7 +476,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.itransform",
     "page": "Library",
     "title": "ApproxFun.itransform",
-    "category": "Function",
+    "category": "function",
     "text": "itransform(s::Space,coefficients::AbstractVector)\n\nTransform coefficients back to values.  Defaults to using canonicalspace as in transform.\n\n\n\n"
 },
 
@@ -484,7 +484,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.transform",
     "page": "Library",
     "title": "ApproxFun.transform",
-    "category": "Function",
+    "category": "function",
     "text": "transform(s::Space,vals::Vector)\n\nTransform values on the grid specified by points(s,length(vals)) to coefficients in the space s. Defaults to coefficients(transform(canonicalspace(space),values),canonicalspace(space),space)\n\n\n\n"
 },
 
@@ -492,7 +492,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.evaluate-Tuple{ApproxFun.Space,AbstractArray{T,1} where T,Any}",
     "page": "Library",
     "title": "ApproxFun.evaluate",
-    "category": "Method",
+    "category": "method",
     "text": "evaluate(sp::Space,coefficients::AbstractVector,x)\n\nEvaluates the expansion at a point x. If x is in the domain, then this should return zero.\n\n\n\n"
 },
 
@@ -500,7 +500,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.dimension-Tuple{ApproxFun.Space}",
     "page": "Library",
     "title": "ApproxFun.dimension",
-    "category": "Method",
+    "category": "method",
     "text": "dimension(s::Space)\n\nreturns the dimension of s, which is the maximum number of coefficients.\n\n\n\n"
 },
 
@@ -516,7 +516,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.SequenceSpace",
     "page": "Library",
     "title": "ApproxFun.SequenceSpace",
-    "category": "Type",
+    "category": "type",
     "text": "SequenceSpace is the space of all sequences, i.e., infinite vectors. Also denoted ℓ⁰.\n\n\n\n"
 },
 
@@ -524,7 +524,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.ConstantSpace",
     "page": "Library",
     "title": "ApproxFun.ConstantSpace",
-    "category": "Type",
+    "category": "type",
     "text": "ConstantSpace is the 1-dimensional scalar space.\n\n\n\n"
 },
 
@@ -532,7 +532,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Chebyshev",
     "page": "Library",
     "title": "ApproxFun.Chebyshev",
-    "category": "Type",
+    "category": "type",
     "text": "Chebyshev() is the space spanned by the Chebyshev polynomials\n\n    T_0(x),T_1(x),T_2(x),…\n\nwhere T_k(x) = cos(k*acos(x)).  This is the default space as there exists a fast transform and general smooth functions on [-1,1] can be easily resolved.\n\n\n\n"
 },
 
@@ -540,7 +540,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Jacobi",
     "page": "Library",
     "title": "ApproxFun.Jacobi",
-    "category": "Type",
+    "category": "type",
     "text": "Jacobi(b,a) represents the space spanned by Jacobi polynomials P_k^{(a,b)}, which are orthogonal with respect to the weight (1+x)^β*(1-x)^α\n\n\n\n"
 },
 
@@ -548,7 +548,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Ultraspherical",
     "page": "Library",
     "title": "ApproxFun.Ultraspherical",
-    "category": "Type",
+    "category": "type",
     "text": "Ultraspherical(λ) is the space spanned by the ultraspherical polynomials\n\n    C_0^{(λ)}(x),C_1^{(λ)}(x),C_2^{(λ)}(x),…\n\nNote that λ=1 this reduces to Chebyshev polynomials of the second kind: C_k^{(1)}(x) = U_k(x).\n\n\n\n"
 },
 
@@ -556,7 +556,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Taylor",
     "page": "Library",
     "title": "ApproxFun.Taylor",
-    "category": "Type",
+    "category": "type",
     "text": "Taylor() is the space spanned by [1,z,z^2,...]. This is a type alias for Hardy{true}.\n\n\n\n"
 },
 
@@ -564,7 +564,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Hardy",
     "page": "Library",
     "title": "ApproxFun.Hardy",
-    "category": "Type",
+    "category": "type",
     "text": "Hardy{false}() is the space spanned by [1/z,1/z^2,...]. Hardy{true}() is the space spanned by [1,z,z^2,...].\n\n\n\n"
 },
 
@@ -572,7 +572,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Fourier",
     "page": "Library",
     "title": "ApproxFun.Fourier",
-    "category": "Type",
+    "category": "type",
     "text": "Fourier() is the space spanned by the trigonemtric polynomials\n\n    1,sin(θ),cos(θ),sin(2θ),cos(2θ),…\n\nSee also Laurent.\n\n\n\n"
 },
 
@@ -580,7 +580,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Laurent",
     "page": "Library",
     "title": "ApproxFun.Laurent",
-    "category": "Type",
+    "category": "type",
     "text": "Laurent() is the space spanned by the complex exponentials\n\n    1,exp(-im*θ),exp(im*θ),exp(-2im*θ),…\n\nSee also Fourier.\n\n\n\n"
 },
 
@@ -588,7 +588,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.CosSpace",
     "page": "Library",
     "title": "ApproxFun.CosSpace",
-    "category": "Type",
+    "category": "type",
     "text": "CosSpace() is the space spanned by [1,cos θ,cos 2θ,...]\n\n\n\n"
 },
 
@@ -596,7 +596,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.SinSpace",
     "page": "Library",
     "title": "ApproxFun.SinSpace",
-    "category": "Type",
+    "category": "type",
     "text": "SinSpace() is the space spanned by [sin θ,sin 2θ,...]\n\n\n\n"
 },
 
@@ -604,7 +604,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.JacobiWeight",
     "page": "Library",
     "title": "ApproxFun.JacobiWeight",
-    "category": "Type",
+    "category": "type",
     "text": "JacobiWeight(β,α,s::Space)\n\nweights a space s by a Jacobi weight, which on -1..1 is (1+x)^β*(1-x)^α. For other domains, the weight is inferred by mapping to -1..1.\n\n\n\n"
 },
 
@@ -612,7 +612,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.LogWeight",
     "page": "Library",
     "title": "ApproxFun.LogWeight",
-    "category": "Type",
+    "category": "type",
     "text": "LogWeight(β,α,s::Space)\n\nrepresents a function on -1..1 weighted by log((1+x)^β*(1-x)^α). For other domains, the weight is inferred by mapping to -1..1.\n\n\n\n"
 },
 
@@ -620,7 +620,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.ArraySpace",
     "page": "Library",
     "title": "ApproxFun.ArraySpace",
-    "category": "Type",
+    "category": "type",
     "text": "ArraySpace(s::Space,dims...)\n\nis used to represent array-valued expansions in a space s.  The coefficients are of each entry are interlaced.\n\nFor example,\n\nf = Fun(x->[exp(x),sin(x)],-1..1)\nspace(f) == ArraySpace(Chebyshev(),2)\n\n\n\n"
 },
 
@@ -628,7 +628,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.TensorSpace",
     "page": "Library",
     "title": "ApproxFun.TensorSpace",
-    "category": "Type",
+    "category": "type",
     "text": "TensorSpace(a::Space,b::Space)\n\nrepresents a tensor product of two 1D spaces a and b. The coefficients are interlaced in lexigraphical order.\n\nFor example, consider\n\nFourier()*Chebyshev()  # returns TensorSpace(Fourier(),Chebyshev())\n\nThis represents functions on [-π,π) x [-1,1], using the Fourier basis for the first argument and Chebyshev basis for the second argument, that is, φ_k(x)T_j(y), where\n\nφ_0(x) = 1,\nφ_1(x) = sin x,\nφ_2(x) = cos x,\nφ_3(x) = sin 2x,\nφ_4(x) = cos 2x\n…\n\nBy Choosing (k,j) appropriately, we obtain a single basis:\n\nφ_0(x)T_0(y) (= 1),\nφ_0(x)T_1(y) (= y),\nφ_1(x)T_0(y) (= sin x),\nφ_0(x)T_2(y), …\n\n\n\n"
 },
 
@@ -644,7 +644,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.domain",
     "page": "Library",
     "title": "ApproxFun.domain",
-    "category": "Function",
+    "category": "function",
     "text": "domain(f::Fun)\n\nreturns the domain that f is defined on\n\n\n\n"
 },
 
@@ -652,7 +652,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.coefficients",
     "page": "Library",
     "title": "ApproxFun.coefficients",
-    "category": "Function",
+    "category": "function",
     "text": "coefficients(f::Fun) -> Vector\n\nreturns the coefficients of f, corresponding to the space space(f).\n\n\n\ncoefficients(f::Fun,s::Space) -> Vector\n\nreturns the coefficients of f in the space s, which may not be the same as space(f).\n\n\n\ncoefficients(cfs::AbstractVector,fromspace::Space,tospace::Space) -> Vector\n\nconverts coefficients in fromspace to coefficients in tospace\n\n\n\n"
 },
 
@@ -660,7 +660,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.extrapolate",
     "page": "Library",
     "title": "ApproxFun.extrapolate",
-    "category": "Function",
+    "category": "function",
     "text": "extrapolate(f::Fun,x)\n\nreturns an extrapolation of f from its domain to x.\n\n\n\n"
 },
 
@@ -668,7 +668,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.ncoefficients",
     "page": "Library",
     "title": "ApproxFun.ncoefficients",
-    "category": "Function",
+    "category": "function",
     "text": "ncoefficients(f::Fun) -> Integer\n\nreturns the number of coefficients of a fun\n\n\n\n"
 },
 
@@ -676,7 +676,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.points",
     "page": "Library",
     "title": "ApproxFun.points",
-    "category": "Function",
+    "category": "function",
     "text": "points(f::Fun)\n\nreturns a grid of points that f can be transformed into values and back\n\n\n\npoints(s::Space,n::Integer)\n\nreturns a grid of approximately n points, for which a transform exists from values at the grid to coefficients in the space s.\n\n\n\n"
 },
 
@@ -684,7 +684,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.space",
     "page": "Library",
     "title": "ApproxFun.space",
-    "category": "Function",
+    "category": "function",
     "text": "space(f::Fun)\n\nreturns the space of f\n\n\n\n"
 },
 
@@ -692,7 +692,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#Base.values",
     "page": "Library",
     "title": "Base.values",
-    "category": "Function",
+    "category": "function",
     "text": "values(f::Fun)\n\nreturns f evaluated at points(f)\n\n\n\n"
 },
 
@@ -700,7 +700,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#Base.stride-Tuple{ApproxFun.Fun}",
     "page": "Library",
     "title": "Base.stride",
-    "category": "Method",
+    "category": "method",
     "text": "stride(f::Fun)\n\nreturns the stride of the coefficients, checked numerically\n\n\n\n"
 },
 
@@ -716,7 +716,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.reverseorientation",
     "page": "Library",
     "title": "ApproxFun.reverseorientation",
-    "category": "Function",
+    "category": "function",
     "text": "reverseorientation(f::Fun)\n\nreturn f on a reversed orientated contour.\n\n\n\n"
 },
 
@@ -724,7 +724,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.setdomain",
     "page": "Library",
     "title": "ApproxFun.setdomain",
-    "category": "Function",
+    "category": "function",
     "text": "setdomain(f::Fun,d::Domain)\n\nreturns f projected onto domain\n\n\n\n"
 },
 
@@ -732,7 +732,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#Base.chop",
     "page": "Library",
     "title": "Base.chop",
-    "category": "Function",
+    "category": "function",
     "text": "chop(f::Fun,tol) -> Fun\n\nreduces the number of coefficients by dropping the tail that is below the specified tolerance.\n\n\n\n"
 },
 
@@ -748,7 +748,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Operator",
     "page": "Library",
     "title": "ApproxFun.Operator",
-    "category": "Type",
+    "category": "type",
     "text": "Operator{T}\n\nis an abstract type to represent linear operators between spaces.\n\n\n\n"
 },
 
@@ -756,7 +756,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#BandedMatrices.bandwidths-Tuple{ApproxFun.Operator}",
     "page": "Library",
     "title": "BandedMatrices.bandwidths",
-    "category": "Method",
+    "category": "method",
     "text": "bandwidths(op::Operator)\n\nreturns the bandwidth of op in the form (l,u), where l ≥ 0 represents the number of subdiagonals and u ≥ 0 represents the number of superdiagonals.\n\n\n\n"
 },
 
@@ -764,7 +764,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.domainspace",
     "page": "Library",
     "title": "ApproxFun.domainspace",
-    "category": "Function",
+    "category": "function",
     "text": "domainspace(op::Operator)\n\ngives the domain space of op.  That is, op*f will first convert f to a Fun in the space domainspace(op) before applying the operator.\n\n\n\n"
 },
 
@@ -772,7 +772,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.rangespace",
     "page": "Library",
     "title": "ApproxFun.rangespace",
-    "category": "Function",
+    "category": "function",
     "text": "rangespace(op::Operator)\n\ngives the range space of op.  That is, op*f will return a Fun in the space rangespace(op), provided f can be converted to a Fun in domainspace(op).\n\n\n\n"
 },
 
@@ -780,7 +780,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#Base.getindex-Tuple{ApproxFun.Operator,Any,Any}",
     "page": "Library",
     "title": "Base.getindex",
-    "category": "Method",
+    "category": "method",
     "text": "op[k,j]\n\nreturns the kth coefficient of op*Fun([zeros(j-1);1],domainspace(op)).\n\n\n\n"
 },
 
@@ -788,7 +788,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#Base.getindex-Tuple{ApproxFun.Operator,ApproxFun.Fun}",
     "page": "Library",
     "title": "Base.getindex",
-    "category": "Method",
+    "category": "method",
     "text": "op[f::Fun]\n\nconstructs the operator op*Multiplication(f), that is, it multiplies on the right by f first.  Note that op*f is different: it applies op to f.\n\n\n\n"
 },
 
@@ -796,7 +796,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#Base.:\\-Tuple{ApproxFun.Operator,Any}",
     "page": "Library",
     "title": "Base.:\\",
-    "category": "Method",
+    "category": "method",
     "text": "\\(A::Operator,b;tolerance=tol,maxlength=n)\n\nsolves a linear equation, usually differential equation, where A is an operator or array of operators and b is a Fun or array of funs.  The result u will approximately satisfy A*u = b.\n\n\n\n"
 },
 
@@ -804,7 +804,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#Base.LinAlg.qrfact-Tuple{ApproxFun.Operator}",
     "page": "Library",
     "title": "Base.LinAlg.qrfact",
-    "category": "Method",
+    "category": "method",
     "text": "qrfact(A::Operator)\n\nreturns a cached QR factorization of the Operator A.  The result QR enables solving of linear equations: if u=QR\\b, then u approximately satisfies A*u = b.\n\n\n\n"
 },
 
@@ -812,7 +812,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.cache-Tuple{ApproxFun.Operator}",
     "page": "Library",
     "title": "ApproxFun.cache",
-    "category": "Method",
+    "category": "method",
     "text": "cache(op::Operator)\n\nCaches the entries of an operator, to speed up multiplying a Fun by the operator.\n\n\n\n"
 },
 
@@ -828,7 +828,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Conversion",
     "page": "Library",
     "title": "ApproxFun.Conversion",
-    "category": "Type",
+    "category": "type",
     "text": "Conversion(fromspace::Space,tospace::Space)\n\nrepresents a conversion operator between fromspace and tospace, when available.\n\n\n\n"
 },
 
@@ -836,7 +836,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Derivative",
     "page": "Library",
     "title": "ApproxFun.Derivative",
-    "category": "Type",
+    "category": "type",
     "text": "Derivative(sp::Space,k::Int) represents the k-th derivative on sp.\n\n\n\nDerivative(sp::Space,k::Vector{Int}) represents a partial derivative on a multivariate space. For example,\n\nDx = Derivative(Chebyshev()^2,[1,0]) # ∂/∂x\nDy = Derivative(Chebyshev()^2,[0,1]) # ∂/∂y\n\n\n\nDerivative(sp::Space) represents the first derivative Derivative(sp,1).\n\n\n\nDerivative(k) represents the k-th derivative, acting on an unset space. Spaces will be inferred when applying or manipulating the operator.\n\n\n\nDerivative() represents the first derivative on an unset space. Spaces will be inferred when applying or manipulating the operator.\n\n\n\n"
 },
 
@@ -844,7 +844,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Dirichlet",
     "page": "Library",
     "title": "ApproxFun.Dirichlet",
-    "category": "Type",
+    "category": "type",
     "text": "Dirichlet(sp,k) is the operator associated with restricting the k-th derivative on the boundary for the space sp.\n\n\n\nDirichlet(sp) is the operator associated with restricting the  the boundary for the space sp.\n\n\n\nDirichlet() is the operator associated with restricting on the  the boundary.\n\n\n\n"
 },
 
@@ -852,7 +852,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Evaluation",
     "page": "Library",
     "title": "ApproxFun.Evaluation",
-    "category": "Type",
+    "category": "type",
     "text": "Evaluation(sp,x,k) is the functional associated with evaluating the k-th derivative at a point x for the space sp.\n\n\n\nEvaluation(sp,x) is the functional associated with evaluating at a point x for the space sp.\n\n\n\nEvaluation(x) is the functional associated with evaluating at a point x.\n\n\n\n"
 },
 
@@ -860,7 +860,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Integral",
     "page": "Library",
     "title": "ApproxFun.Integral",
-    "category": "Type",
+    "category": "type",
     "text": "Integral(sp::Space,k::Int) represents a k-th integral on sp. There is no guarantee on normalization.\n\n\n\nIntegral(sp::Space) represents the first integral Integral(sp,1).\n\n\n\nIntegral(k)represents thek`-th integral, acting on an unset space. Spaces will be inferred when applying or manipulating the operator.\n\n\n\nIntergral() represents the first integral on an unset space. Spaces will be inferred when applying or manipulating the operator.\n\n\n\n"
 },
 
@@ -868,7 +868,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Laplacian",
     "page": "Library",
     "title": "ApproxFun.Laplacian",
-    "category": "Type",
+    "category": "type",
     "text": "Laplacian(sp::Space) represents the laplacian on space sp.\n\n\n\nLaplacian() represents the laplacian on an unset space. Spaces will be inferred when applying or manipulating the operator.\n\n\n\n"
 },
 
@@ -876,7 +876,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Multiplication",
     "page": "Library",
     "title": "ApproxFun.Multiplication",
-    "category": "Type",
+    "category": "type",
     "text": "Multiplication(f::Fun,sp::Space) is the operator representing multiplication by f on functions in the space sp.\n\n\n\nMultiplication(f::Fun) is the operator representing multiplication by f on an unset space of functions.  Spaces will be inferred when applying or manipulating the operator.\n\n\n\n"
 },
 
@@ -884,7 +884,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.Neumann",
     "page": "Library",
     "title": "ApproxFun.Neumann",
-    "category": "Function",
+    "category": "function",
     "text": "Neumann(sp) is the operator associated with restricting the normal derivative on the boundary for the space sp. At the moment it is implemented as Dirichlet(sp,1).\n\n\n\n`Neumann( is the operator associated with restricting the normal derivative on the boundary.\n\n\n\n"
 },
 
@@ -900,7 +900,7 @@ var documenterSearchIndex = {"docs": [
     "location": "library.html#ApproxFun.LowRankFun",
     "page": "Library",
     "title": "ApproxFun.LowRankFun",
-    "category": "Type",
+    "category": "type",
     "text": "LowRankFun gives an approximation to a bivariate function in low rank form.\n\n\n\n"
 },
 
