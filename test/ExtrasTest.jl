@@ -125,4 +125,10 @@ using ApproxFun, Test, DualNumbers
         @test norm(u - u1) < 1e-15
 
     end
+    @testset "SumSpace" begin
+        f=Fun([Legendre(),Chebyshev()],[[1.0],[1.0]])
+        f1=Fun(Legendre(),[1.0])
+        f2=Fun(Chebyshev(),[1.0])
+        f(0.1)==f1(0.1)+f2(0.1)
+    end
 end
