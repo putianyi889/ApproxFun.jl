@@ -27,3 +27,4 @@ include("fractional.jl")
 
 include("dualnumbers.jl")
 include("lanczos.jl")
+include("MySumSpace.jl")
