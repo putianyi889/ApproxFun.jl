@@ -3,7 +3,7 @@
 A `Space` is an abstract type whose subtypes indicate which space a function lives in.
 This typically corresponds to the span of a (possibly infinite) basis.
 
-![The `Space` type system](/images/Space.png)
+![The `Space` type system](/images/Space.png "The `Space` system")
 
 ## Classical orthogonal polynomial spaces
 
