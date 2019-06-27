@@ -3,6 +3,8 @@
 A `Space` is an abstract type whose subtypes indicate which space a function lives in.
 This typically corresponds to the span of a (possibly infinite) basis.
 
+![The `Space` type system](/images/Space.png)
+
 ## Classical orthogonal polynomial spaces
 
 `Chebyshev`, `Ultraspherical`, `Jacobi`, `Hermite`, and `Laguerre` are spaces
