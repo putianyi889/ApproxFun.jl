@@ -2,7 +2,7 @@ mutable struct MySumSpace{D,R} <: Space{D,R}
     spaces::Array{<:Space{D,R},1}
 end
 
-for op in(:Base.getindex,:Base.size,:Base.length)
+for op in (:(Base.getindex),:(Base.size),:(Base.length))
     @eval $op(S::MySumSpace...)=$op(S.spaces...)
 end
 
@@ -20,7 +20,7 @@ struct MatrixOperator{T} <: Operator{T}
     matrix::Array{<:Operator{T},2}
 end
 
-for op in (:Base.getindex,:Base.size,:*)
+for op in (:(Base.getindex),:(Base.size),:*)
     @eval $op(D::MatrixOperator...)=$op(D.matrix...)
 end
 #Base.getindex(D::MatrixOperator,k::Integer,m::Integer)=D.matrix[k,m]
