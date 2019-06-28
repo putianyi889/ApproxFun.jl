@@ -126,9 +126,7 @@ using ApproxFun, Test, DualNumbers
 
     end
     @testset "SumSpace" begin
-        f=Fun([Legendre(),Chebyshev()],[[1.0],[1.0]])
-        f1=Fun(Legendre(),[1.0])
-        f2=Fun(Chebyshev(),[1.0])
-        f(0.1)==f1(0.1)+f2(0.1)
+        S=MySumSpace{}([Legendre(),Chebyshev()])
+        @test length(S) == 2
     end
 end
