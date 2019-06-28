@@ -1,4 +1,4 @@
-struct MySumSpace <: Space
+struct MySumSpace{} <: Space
     spaces::Array{<:Space,1}
 end
 
@@ -16,7 +16,7 @@ function Conversion(S1::MySumSpace, S2::MySumSpace)
     [m==n ? Conversion(S1[m],S2[n]) : ZeroOperator(S1[m],S2[n]) for n in 1:length(S2), m in 1:length(S1)]
 end
     
-struct MatrixOperator <: Operator
+struct MatrixOperator{} <: Operator
     matrix::Array{<:Operator,2}
 end
 
