@@ -8,7 +8,7 @@ struct MatrixOperator{T} <: Operator{T}
 end
 
 # Basic
-Base.getindex(S::MySumSpace,k::Integer)=MySumSpace.spaces[k]
+Base.getindex(S::MySumSpace,k::Integer)=S.spaces[k]
 Base.length(S::MySumSpace)=Base.length(S.spaces)
 Base.size(S::MySumSpace)=Base.size(S.spaces)
 Base.getindex(D::MatrixOperator,k::Integer,m::Integer)=D.matrix[k,m]
