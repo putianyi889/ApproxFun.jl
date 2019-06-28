@@ -5,6 +5,19 @@ struct MySumSpace{D,R} <: Space{D,R}
 end
 struct MatrixOperator{T} <: Operator{T}
     matrix::Array{<:Operator{T},2}
+    function MatrixOperator(C)
+        for m in 1:size(C)[1]
+            if !foldl(spacescompatible,rangespace.(C[m,:]))
+                error("Row $(m) does not have the same rangespace.")
+            end
+        end
+        for n in 1:size(C)[2]
+            if !foldl(spacescompatible,domainspace.(C[:,n]))
+                error("Column $(n) does not have the same domainspace.")
+            end
+        end
+        new(C)
+    end
 end
 
 # Basic
@@ -15,8 +28,8 @@ Base.getindex(D::MatrixOperator,k::Integer,m::Integer)=D.matrix[k,m]
 Base.getindex(D::MatrixOperator,k::Integer)=D.matrix[k]
 Base.size(D::MatrixOperator)=size(D.matrix)
 
-domainspace(S::MatrixOperator)=MySumSpace([promote_rule(domainspace.(S.matrix[:,n])...) for n in 1:size(S.matrix)[2]])
-rangespace(S::MatrixOperator)=MySumSpace([promote_rule(rangespace.(S.matrix[m,:])...) for m in 1:size(S.matrix)[1]])
+domainspace(S::MatrixOperator)=MySumSpace([domainspace.(S.matrix[1,n]) for n in 1:size(S.matrix)[2]])
+rangespace(S::MatrixOperator)=MySumSpace([rangespace.(S.matrix[m,1]) for m in 1:size(S.matrix)[1]])
 
 # Interact with coefficients
 *(D::MatrixOperator,f::Array{<:AbstractArray,1})=D.matrix*f
