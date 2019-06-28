@@ -13,6 +13,7 @@ Base.size(S::MySumSpace)=Base.size(S.spaces)
 Base.getindex(D::MatrixOperator,k::Integer,m::Integer)=D.matrix[k,m]
 Base.getindex(D::MatrixOperator,k::Integer)=D.matrix[k]
 Base.size(D::MatrixOperator)=size(D.matrix)
+*(D::MatrixOperator,f::Array{<:AbstractArray,1})=D.matrix*f
 
 evaluate(f::AbstractArray{<:AbstractArray,1}, S::MySumSpace, x) = sum(evaluate.(f,S.spaces,x))
 
