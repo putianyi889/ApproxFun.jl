@@ -1,3 +1,5 @@
+export MySumSpace,MatrixOperator
+
 mutable struct MySumSpace{D,R} <: Space{D,R}
     spaces::Array{<:Space{D,R},1}
 end
