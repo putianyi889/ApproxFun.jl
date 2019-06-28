@@ -1,4 +1,4 @@
-struct MySumSpace{} <: Space
+mutable struct MySumSpace <: Space
     spaces::Array{<:Space,1}
 end
 
