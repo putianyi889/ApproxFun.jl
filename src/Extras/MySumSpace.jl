@@ -2,12 +2,16 @@ struct MySumSpace <: Space
     spaces::Array{<:Space,1}
 end
 
-Base.getindex(S::MySumSpace,k::Integer)=MySumSpace.spaces[k]
-length(S::MySumSpace)=length(S.spaces)
+for op in(:Base.getindex,:Base.size,:Base.length)
+    @eval $op(S::MySumSpace...)=$op(S.spaces...)
+end
+
+#Base.getindex(S::MySumSpace,k::Integer)=MySumSpace.spaces[k]
+#length(S::MySumSpace)=length(S.spaces)
 
 evaluate(f::AbstractArray{<:AbstractArray,1}, S::MySumSpace, x) = sum(evaluate.(f,S.spaces,x))
 
-function Conversion(S1::Array{<:Space,1}, S2::Array{<:Space,1})
+function Conversion(S1::MySumSpace, S2::MySumSpace)
     @assert length(S1) == length(S2)
     [m==n ? Conversion(S1[m],S2[n]) : ZeroOperator(S1[m],S2[n]) for n in 1:length(S2), m in 1:length(S1)]
 end
