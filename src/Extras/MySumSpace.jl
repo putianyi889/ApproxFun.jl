@@ -15,8 +15,8 @@ Base.getindex(D::MatrixOperator,k::Integer,m::Integer)=D.matrix[k,m]
 Base.getindex(D::MatrixOperator,k::Integer)=D.matrix[k]
 Base.size(D::MatrixOperator)=size(D.matrix)
 
-domainspace(S::MatrixOperator)=MySumSpace([promote_type(domainspace.(S.matrix[:,n])...) for n in 1:size(S.matrix)[2]])
-rangespace(S::MatrixOperator)=MySumSpace([promote_type(rangespace.(S.matrix[m,:])...) for m in 1:size(S.matrix)[1]])
+domainspace(S::MatrixOperator)=MySumSpace([promote_rule(domainspace.(S.matrix[:,n])...) for n in 1:size(S.matrix)[2]])
+rangespace(S::MatrixOperator)=MySumSpace([promote_rule(rangespace.(S.matrix[m,:])...) for m in 1:size(S.matrix)[1]])
 
 # Interact with coefficients
 *(D::MatrixOperator,f::Array{<:AbstractArray,1})=D.matrix*f
