@@ -133,5 +133,11 @@ using ApproxFun, Test, DualNumbers
         f1=Fun(Legendre(),[1.0])
         f2=Fun(Chebyshev(),[1.0])
         @test f(0.1)==f1(0.1)+f2(0.1)
+        
+        S1=MySumSpace([Legendre(),Chebyshev()])
+        S2=MySumSpace([Chebyshev(),Legendre()])
+        C=Conversion(S1,S2,[2,1])
+        @test domainspace(C.matrix) == C.domainspace
+        @test rangespace(C.matrix) == C.rangespace
     end
 end
