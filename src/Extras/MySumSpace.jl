@@ -7,6 +7,7 @@ struct MatrixOperator{T} <: Operator{T}
     matrix::Array{<:Operator{T},2}
     domainspace::MySumSpace
     rangespace::MySumSpace
+    # domainspace and rangspace can be obtained from matrix, a validity check is omitted here. Be careful to manually set the spaces.
 end
 
 # Basic
