@@ -2,7 +2,7 @@ export MySumSpace,MatrixOperator
 
 struct MySumSpace{D,R} <: Space{D,R}
     spaces::Array{<:Space{D,R},1}
-    function MySumSpace(S::Array{<:Space{D,R},1})
+    function MySumSpace(S::Array{<:Space{D,R},1}) where {D,R}
         if !foldl(domainscompatible,domain.(S))
             error("Components of MySumSpace do not have the same domain.")
         else
