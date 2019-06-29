@@ -136,7 +136,7 @@ using ApproxFun, Test, DualNumbers
         
         S1=MySumSpace([Legendre(),Chebyshev()])
         S2=MySumSpace([Chebyshev(),Legendre()])
-        C=MatrixOperator(Conversion(S1,MySumSpace(S2[[2,1]])).matrix[[2,1],:])
+        C=MatrixOperator(Conversion(S1,MySumSpace(S2.spaces[[2,1]])).matrix[[2,1],:])
         @test domainspace(C) == S1
         @test rangespace(C) == S2
         
