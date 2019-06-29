@@ -5,7 +5,7 @@ struct MySumSpace{D,R} <: Space{D,R}
 end
 struct MatrixOperator{T} <: Operator{T}
     matrix::Array{<:Operator{T},2}
-    function MatrixOperator(C)
+    function MatrixOperator{T}(C)
         for m in 1:size(C)[1]
             if !foldl(spacescompatible,rangespace.(C[m,:]))
                 error("Row $(m) does not have the same rangespace.")
@@ -16,7 +16,7 @@ struct MatrixOperator{T} <: Operator{T}
                 error("Column $(n) does not have the same domainspace.")
             end
         end
-        new(C)
+        new{T}(C)
     end
 end
 
