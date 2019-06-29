@@ -2,18 +2,25 @@ export MySumSpace,MatrixOperator
 
 struct MySumSpace{D,R} <: Space{D,R}
     spaces::Array{<:Space{D,R},1}
+    function MySumSpace(S::Array{<:Space{D,R},1})
+        if !foldl(domainscompatible,domain.(S))
+            error("Components of MySumSpace do not have the same domain.")
+        else
+            new{D,R}(S)
+        end
+    end
 end
 struct MatrixOperator{T} <: Operator{T}
     matrix::Array{<:Operator{T},2}
     function MatrixOperator(C::Array{<:Operator{T},2}) where T
         for m in 1:size(C)[1]
             if !foldl(spacescompatible,rangespace.(C[m,:]))
-                error("Row $(m) does not have the same rangespace.")
+                error("Row $(m) do not have the same rangespace.")
             end
         end
         for n in 1:size(C)[2]
             if !foldl(spacescompatible,domainspace.(C[:,n]))
-                error("Column $(n) does not have the same domainspace.")
+                error("Column $(n) do not have the same domainspace.")
             end
         end
         new{T}(C)
@@ -31,6 +38,7 @@ Base.show(io::IO,C::MatrixOperator)=print(io,typeof(C))
 
 domainspace(S::MatrixOperator)=MySumSpace([domainspace(S.matrix[1,n]) for n in 1:size(S.matrix)[2]])
 rangespace(S::MatrixOperator)=MySumSpace([rangespace(S.matrix[m,1]) for m in 1:size(S.matrix)[1]])
+domain(S::MySumSpace)=domain(S.spaces[1])
 
 spacescompatible(S1::MySumSpace,S2::MySumSpace)=all(spacescompatible.(S1.spaces,S2.spaces))
 
