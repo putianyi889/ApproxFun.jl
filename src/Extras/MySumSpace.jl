@@ -5,7 +5,7 @@ struct MySumSpace{D,R} <: Space{D,R}
 end
 struct MatrixOperator{T} <: Operator{T}
     matrix::Array{<:Operator{T},2}
-    function MatrixOperator(::Array{<:Operator{T},2}) where T
+    function MatrixOperator(C::Array{<:Operator{T},2}) where T
         for m in 1:size(C)[1]
             if !foldl(spacescompatible,rangespace.(C[m,:]))
                 error("Row $(m) does not have the same rangespace.")
