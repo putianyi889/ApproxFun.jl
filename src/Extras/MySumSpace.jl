@@ -1,5 +1,7 @@
 export MySumSpace,MatrixOperator
 
+using LinearAlgebra
+
 struct MySumSpace{D,R} <: Space{D,R}
     spaces::Array{<:Space{D,R},1}
     function MySumSpace(S::Array{<:Space{D,R},1}) where {D,R}
@@ -42,22 +44,20 @@ domain(S::MySumSpace)=domain(S.spaces[1])
 
 spacescompatible(S1::MySumSpace,S2::MySumSpace)=all(spacescompatible.(S1.spaces,S2.spaces))
 
+function diagonal(C::Array{<:Operator,1})
+    N = length(C)
+    dsp = domainspace.(C)
+    rsp = rangspace.(C)
+    MatrixOperator([m==n ? C[m] : ZeroOperator(dsp[m],rsp[n]) for n in 1:N, m in 1:N])
+end
+
 # Interact with coefficients
 *(D::MatrixOperator,f::Array{<:AbstractArray,1})=D.matrix*f
 evaluate(f::AbstractArray{<:AbstractArray,1}, S::MySumSpace, x) = sum(evaluate.(f,S.spaces,x))
 
 # MatrixOperator Constructors
-function Conversion(S1::MySumSpace, S2::MySumSpace)
-    @assert length(S1) == length(S2)
-    MatrixOperator([m==n ? Conversion(S1[m],S2[n]) : ZeroOperator(S1[m],S2[n]) for n in 1:length(S2), m in 1:length(S1)])
-end
+Conversion(S1::MySumSpace, S2::MySumSpace) = diagonal(Conversion.(S1.spaces,S2.spaces))
 
-# Derivative
-Derivative(S::MySumSpace,k::Integer)=MatrixOperator(
-    [m==n ? 
-        Derivative(S[m],k) : 
-        ZeroOperator(
-            S[m],rangespace(Derivative(S[n],k))) 
-        for 
-            n in 1:length(S), 
-            m in 1:length(S)])
+Derivative(S::MySumSpace,k::Integer)=diagonal(Derivative.(S.spaces,k))
+
+Multiplication(f::Fun,sp::MySumSpace)=diagonal(Multiplication.(f,sp.spaces))
