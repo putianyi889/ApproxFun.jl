@@ -32,6 +32,8 @@ Base.show(io::IO,C::MatrixOperator)=print(io,typeof(C))
 domainspace(S::MatrixOperator)=MySumSpace([domainspace(S.matrix[1,n]) for n in 1:size(S.matrix)[2]])
 rangespace(S::MatrixOperator)=MySumSpace([rangespace(S.matrix[m,1]) for m in 1:size(S.matrix)[1]])
 
+spacescompatible(S1::MySumSpace,S2::MySumSpace)=all(spacescompatible.(S1.spaces,S2.spaces))
+
 # Interact with coefficients
 *(D::MatrixOperator,f::Array{<:AbstractArray,1})=D.matrix*f
 
