@@ -27,6 +27,7 @@ Base.size(S::MySumSpace)=Base.size(S.spaces)
 Base.getindex(D::MatrixOperator,k::Integer,m::Integer)=D.matrix[k,m]
 Base.getindex(D::MatrixOperator,k::Integer)=D.matrix[k]
 Base.size(D::MatrixOperator)=size(D.matrix)
+Base.show(io::IO,C::MatrixOperator)=print(io,typeof(C))
 
 domainspace(S::MatrixOperator)=MySumSpace([domainspace.(S.matrix[1,n]) for n in 1:size(S.matrix)[2]])
 rangespace(S::MatrixOperator)=MySumSpace([rangespace.(S.matrix[m,1]) for m in 1:size(S.matrix)[1]])
