@@ -258,3 +258,5 @@ function show(io::IO,B::Operator;header::Bool=true)
         end
     end
 end
+
+show(io::IO,C::MatrixOperator)=print(io,typeof(C))
