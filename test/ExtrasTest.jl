@@ -125,4 +125,19 @@ using ApproxFun, Test, DualNumbers
         @test norm(u - u1) < 1e-15
 
     end
+    @testset "SumSpace" begin
+        S=MySumSpace([Legendre(),Chebyshev()])
+        @test length(S) == 2
+        
+        f=Fun(MySumSpace([Legendre(),Chebyshev()]),[[1.0],[1.0]])
+        f1=Fun(Legendre(),[1.0])
+        f2=Fun(Chebyshev(),[1.0])
+        @test f(0.1)==f1(0.1)+f2(0.1)
+        
+        S1=MySumSpace([Legendre(),Chebyshev()])
+        S2=MySumSpace([Chebyshev(),Legendre()])
+        C=Conversion(S1,S2,[2,1])
+        @test domainspace(C) == S1
+        @test rangespace(C) == S2
+    end
 end
