@@ -139,5 +139,8 @@ using ApproxFun, Test, DualNumbers
         C=Conversion(S1,S2,[2,1])
         @test domainspace(C) == S1
         @test rangespace(C) == S2
+        
+        Derivative(S1,1)
+        Derivative(S1,2)
     end
 end
