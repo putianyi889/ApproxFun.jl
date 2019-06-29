@@ -1,6 +1,6 @@
 export MySumSpace,MatrixOperator
 
-mutable struct MySumSpace{D,R} <: Space{D,R}
+struct MySumSpace{D,R} <: Space{D,R}
     spaces::Array{<:Space{D,R},1}
     function MySumSpace(S::Array{<:Space{D,R},1}) where {D,R}
         if !foldl(domainscompatible,domain.(S))
@@ -10,7 +10,7 @@ mutable struct MySumSpace{D,R} <: Space{D,R}
         end
     end
 end
-mutable struct MatrixOperator{T} <: Operator{T}
+struct MatrixOperator{T} <: Operator{T}
     matrix::Array{<:Operator{T},2}
     function MatrixOperator(C::Array{<:Operator{T},2}) where T
         for m in 1:size(C)[1]
