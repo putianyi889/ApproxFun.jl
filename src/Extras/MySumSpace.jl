@@ -50,3 +50,4 @@ function Conversion(S1::MySumSpace, S2::MySumSpace, plan::Array{<:Integer,1})
     MatrixOperator([plan[m]==n ? Conversion(S1[m],S2[n]) : ZeroOperator(S1[m],S2[n]) for n in 1:length(S2), m in 1:length(S1)])
 end
 
+Derivative(S::MySumSpace,k::Integer)=MatrixOperator([m==n ? Derivative(S[m],k) : ZeroOperator(S[m],domainspace(Derivative(S[n],k))) for n in 1:length(S), m in 1:length(S)])
