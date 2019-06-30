@@ -146,7 +146,6 @@ using ApproxFun, Test, DualNumbers
         
         S1=MySumSpace([Legendre(),Legendre()]) # Simplest case because bugs about ZeroOperator need to be fixed.
         C=Conversion(S1,S1)
-        D=Derivative(S1,1)
-        @test D*C <: MatrixOperator
+        @test C*C <: MatrixOperator
     end
 end
