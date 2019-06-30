@@ -57,7 +57,8 @@ evaluate(f::AbstractArray{<:AbstractArray,1}, S::MySumSpace, x) = sum(evaluate.(
 
 # MatrixOperator Constructors
 Conversion(S1::MySumSpace, S2::MySumSpace) = diagonal(Conversion.(S1.spaces,S2.spaces))
-
-Derivative(S::MySumSpace,k::Integer)=diagonal(Derivative.(S.spaces,k))
-
 Multiplication(f::Fun,sp::MySumSpace)=diagonal(Multiplication.(f,sp.spaces))
+for op in (:Derivative,:LeftIntegral,:RightIntegral)
+    @eval $op(S::MySumSpace,k) = diagonal($op.(S.spaces,k))
+end
+
