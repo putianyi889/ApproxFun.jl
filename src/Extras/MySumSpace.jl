@@ -62,3 +62,6 @@ for op in (:Derivative,:LeftIntegral,:RightIntegral)
     @eval $op(S::MySumSpace,k) = diagonal($op.(S.spaces,k))
 end
 
+*(C1::MatrixOperator,C2::MatrixOperator)=MatrixOperator(C1.matrix*C2.matrix)
+*(C::MatrixOperator,k::Number)=MatrixOperator(C.matrix*k)
+*(k::Number,C::MatrixOperator)=MatrixOperator(k*C.matrix)
