@@ -140,7 +140,9 @@ using ApproxFun, Test, DualNumbers
         @test domainspace(C) == S1
         @test rangespace(C) == S2
         
-        Derivative(S1,1)
         Derivative(S1,2)
+        LeftIntegral(S1,0.5)
+        D=Derivative(S2,1)
+        @test D*C <: MatrixOperator
     end
 end
