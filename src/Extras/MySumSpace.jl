@@ -38,6 +38,8 @@ Base.getindex(D::MatrixOperator,k::Integer)=D.matrix[k]
 Base.size(D::MatrixOperator)=size(D.matrix)
 Base.show(io::IO,C::MatrixOperator)=print(io,typeof(C))
 
+prectype(C::MatrixOperator)=prectype(C.matrix)
+
 domainspace(S::MatrixOperator)=MySumSpace([domainspace(S.matrix[1,n]) for n in 1:size(S.matrix)[2]])
 rangespace(S::MatrixOperator)=MySumSpace([rangespace(S.matrix[m,1]) for m in 1:size(S.matrix)[1]])
 domain(S::MySumSpace)=domain(S.spaces[1])
@@ -46,7 +48,7 @@ spacescompatible(S1::MySumSpace,S2::MySumSpace)=all(spacescompatible.(S1.spaces,
 
 # Algebra
 for op in (:+,:*)
-    @eval $op(C1::MatrixOperator,C2::MatrixOperator)=MatrixOperator(Matrix{Operator}($op(C1.matrix,C2.matrix)))
+    @eval $op(C1::MatrixOperator,C2::MatrixOperator)=MatrixOperator(Matrix{Operator{promote_type(prectype(C1),prectype(C2))}}($op(C1.matrix,C2.matrix)))
 end
 *(D::MatrixOperator,f::Array{<:AbstractArray,1})=D.matrix*f
 *(C::MatrixOperator,k::Number)=MatrixOperator(C.matrix*k)
