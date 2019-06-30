@@ -46,7 +46,7 @@ spacescompatible(S1::MySumSpace,S2::MySumSpace)=all(spacescompatible.(S1.spaces,
 
 # Algebra
 for op in (:+,:*)
-    @eval $op(C1::MatrixOperator,C2::MatrixOperator)=MatrixOperator($op(C1.matrix,C2.matrix))
+    @eval $op(C1::MatrixOperator,C2::MatrixOperator)=MatrixOperator(Matrix{Operator}($op(C1.matrix,C2.matrix)))
 end
 *(D::MatrixOperator,f::Array{<:AbstractArray,1})=D.matrix*f
 *(C::MatrixOperator,k::Number)=MatrixOperator(C.matrix*k)
