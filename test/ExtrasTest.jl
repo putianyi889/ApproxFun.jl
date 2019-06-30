@@ -142,7 +142,11 @@ using ApproxFun, Test, DualNumbers
         
         Derivative(S1,2)
         LeftIntegral(S1,0.5)
-        D=Derivative(S2,1)
+        Derivative(S2,1)
+        
+        S1=MySumSpace([Legendre(),Legendre()]) # Simplest case because bugs about ZeroOperator need to be fixed.
+        C=Conversion(S1,S1)
+        D=Derivative(S1,1)
         @test D*C <: MatrixOperator
     end
 end
