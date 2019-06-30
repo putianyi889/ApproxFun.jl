@@ -50,6 +50,7 @@ spacescompatible(S1::MySumSpace,S2::MySumSpace)=all(spacescompatible.(S1.spaces,
 *(C::MatrixOperator,k::Number)=MatrixOperator(C.matrix*k)
 *(k::Number,C::MatrixOperator)=MatrixOperator(k*C.matrix)
 evaluate(f::AbstractArray{<:AbstractArray,1}, S::MySumSpace, x) = sum(evaluate.(f,S.spaces,x))
+\(C::MatrixOperator,f::Array{<:AbstractArray,1})=C.matrix\f
 
 # MatrixOperator Constructors
 function diagonal(C::Array{<:Operator,1})
