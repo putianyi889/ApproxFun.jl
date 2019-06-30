@@ -51,8 +51,11 @@ function diagonal(C::Array{<:Operator,1})
     MatrixOperator([m==n ? C[m] : ZeroOperator(dsp[m],rsp[n]) for n in 1:N, m in 1:N])
 end
 
-# Interact with coefficients
+# Algebra
 *(D::MatrixOperator,f::Array{<:AbstractArray,1})=D.matrix*f
+*(C1::MatrixOperator,C2::MatrixOperator)=MatrixOperator(C1.matrix*C2.matrix)
+*(C::MatrixOperator,k::Number)=MatrixOperator(C.matrix*k)
+*(k::Number,C::MatrixOperator)=MatrixOperator(k*C.matrix)
 evaluate(f::AbstractArray{<:AbstractArray,1}, S::MySumSpace, x) = sum(evaluate.(f,S.spaces,x))
 
 # MatrixOperator Constructors
@@ -61,7 +64,3 @@ Multiplication(f::Fun,sp::MySumSpace)=diagonal(Multiplication.(f,sp.spaces))
 for op in (:Derivative,:LeftIntegral,:RightIntegral)
     @eval $op(S::MySumSpace,k) = diagonal($op.(S.spaces,k))
 end
-
-*(C1::MatrixOperator,C2::MatrixOperator)=MatrixOperator(C1.matrix*C2.matrix)
-*(C::MatrixOperator,k::Number)=MatrixOperator(C.matrix*k)
-*(k::Number,C::MatrixOperator)=MatrixOperator(k*C.matrix)
